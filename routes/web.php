@@ -11,6 +11,7 @@ Route::name('storefront.')
     ->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('home');
         Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
     });
 
 Route::get('/dashboard', function () {

@@ -21,4 +21,13 @@ class ProductController extends Controller
             'products' => $products,
         ]);
     }
+
+    public function show(Product $product): View
+    {
+        $product->load('images');
+
+        return view('storefront.products.show', [
+            'product' => $product,
+        ]);
+    }
 }
