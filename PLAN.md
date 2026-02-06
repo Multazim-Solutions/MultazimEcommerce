@@ -103,3 +103,7 @@
 - Add caching layer (Redis) for catalog and session data
 - Prepare for CDN by abstracting storage disk configuration
 - Horizontal scaling by separating web and worker containers
+
+**Testing Strategy**
+- PHPUnit for unit and feature tests within Laravel
+- Playwright for API and UI end-to-end tests

@@ -31,6 +31,7 @@ Lean guide for contributors and automation. Keep it small, keep it sharp.
 ## Testing (Required)
 
 - Use Laravel’s default test stack (PHPUnit). Use Pest only if already installed.
+- Use Playwright for API and UI testing (end-to-end coverage).
 - Add tests for every feature, including:
 - Storefront: list, details, cart add/remove, checkout validation
 - Admin: auth guard, product CRUD, order updates, image upload
