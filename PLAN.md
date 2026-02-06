@@ -108,10 +108,13 @@
 - Stack: Tailwind CSS + Flowbite components (customized), tiny utility helpers only
 - Motion: no heavy animation; only subtle state transitions (hover/focus/disabled)
 - Accessibility: keyboard-first flows, visible focus, high-contrast defaults
+- Brand: derive palette from Multazim logo, but use higher-contrast UX colors for UI surfaces and CTAs
 
 **Phased UI Plan**
 - [todo] **Phase 14 - Design System + Layout**
   - Establish tokens (color, spacing, typography) and base layout grids
+  - Extract logo palette and define contrast pairs for primary/secondary/alert states
+  - Define logo usage rules (light/dark surfaces, minimum size, clear space)
   - Create reusable UI components (buttons, inputs, cards, badges, tables)
   - Add app chrome: header, footer, nav, admin sidebar
   - Wire Tailwind + Flowbite config and component overrides
