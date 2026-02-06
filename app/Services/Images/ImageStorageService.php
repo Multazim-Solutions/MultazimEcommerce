@@ -34,6 +34,10 @@ class ImageStorageService
 
     private function generateVariants(string $originalPath): void
     {
+        if (! extension_loaded('gd')) {
+            return;
+        }
+
         $disk = Storage::disk('products');
         $absolute = $disk->path($originalPath);
         $manager = new ImageManager(new Driver());
