@@ -31,13 +31,13 @@
 
 **Phase 3 - Authentication & Authorization**
 
-- [ ] P3-T01 Install Laravel auth scaffolding
-- [ ] P3-T02 Add Google OAuth via Socialite
-- [ ] P3-T03 Implement account linking with `google_id`
-- [ ] P3-T04 Add roles (`admin`, `customer`) to users
-- [ ] P3-T05 Add policies and gates for admin actions
-- [ ] P3-T06 Protect admin routes with `auth` and role middleware
-- [ ] P3-T07 Add Sanctum for API token auth
+- [x] P3-T01 Install Laravel auth scaffolding
+- [x] P3-T02 Add Google OAuth via Socialite
+- [x] P3-T03 Implement account linking with `google_id`
+- [x] P3-T04 Add roles (`admin`, `customer`) to users
+- [x] P3-T05 Add policies and gates for admin actions
+- [x] P3-T06 Protect admin routes with `auth` and role middleware
+- [x] P3-T07 Add Sanctum for API token auth
 
 **Phase 4 - Storefront (Web + API)**
 
