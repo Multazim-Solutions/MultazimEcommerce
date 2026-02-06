@@ -25,5 +25,7 @@ services:
 volumes:
   app_storage:
     driver: local
+    name: multazim_storage
   app_database:
     driver: local
+    name: multazim_database
