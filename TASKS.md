@@ -41,13 +41,13 @@
 
 **Phase 4 - Storefront (Web + API)**
 
-- [ ] P4-T01 Product listing API endpoint
-- [ ] P4-T02 Product details API endpoint
-- [ ] P4-T03 Storefront list page
-- [ ] P4-T04 Storefront details page
-- [ ] P4-T05 Cart add/remove/update endpoints
-- [ ] P4-T06 Cart UI components
-- [ ] P4-T07 Checkout form validation
+- [x] P4-T01 Product listing API endpoint
+- [x] P4-T02 Product details API endpoint
+- [x] P4-T03 Storefront list page
+- [x] P4-T04 Storefront details page
+- [x] P4-T05 Cart add/remove/update endpoints
+- [x] P4-T06 Cart UI components
+- [x] P4-T07 Checkout form validation
 
 **Phase 5 - Orders & Checkout**
 
