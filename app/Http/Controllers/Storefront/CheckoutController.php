@@ -91,7 +91,7 @@ class CheckoutController extends Controller
         try {
             $init = $gateway->initiate($order, $this->customerPayload($request), $this->callbackUrls());
         } catch (\Throwable $exception) {
-            Log::error('Payment initiation failed', [
+            Log::channel('payments')->error('Payment initiation failed', [
                 'order_id' => $order->id,
                 'error' => $exception->getMessage(),
             ]);

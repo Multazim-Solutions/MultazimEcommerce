@@ -27,7 +27,7 @@ class GoogleController extends Controller
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
         } catch (Throwable $exception) {
-            Log::warning('Google OAuth failed', [
+            Log::channel('auth')->warning('Google OAuth failed', [
                 'error' => $exception->getMessage(),
             ]);
 

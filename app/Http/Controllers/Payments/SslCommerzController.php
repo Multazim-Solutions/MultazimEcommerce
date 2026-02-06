@@ -90,7 +90,7 @@ class SslCommerzController extends Controller
 
     private function markFailed(Order $order, string $type, string $message): View
     {
-        Log::warning('SSLCommerz callback failed', [
+        Log::channel('payments')->warning('SSLCommerz callback failed', [
             'order_id' => $order->id,
             'type' => $type,
             'message' => $message,
