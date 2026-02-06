@@ -29,6 +29,11 @@ Simple, modern e-commerce platform for Bangladesh. Built to move fast now and sc
 3. App will be available at
 - `http://localhost:8080` (expected)
 
+## Environment
+- Edit `.env` for runtime values
+- Set Google OAuth keys (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`)
+- Set SSLCommerz keys and callbacks (`SSLCOMMERZ_STORE_ID`, `SSLCOMMERZ_STORE_PASSWORD`, `SSLCOMMERZ_*_URL`)
+
 ## Local (Non-Docker)
 1. Install PHP and Composer
 2. Install dependencies
