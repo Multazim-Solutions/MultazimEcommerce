@@ -115,4 +115,4 @@
 
 **Testing Strategy**
 - PHPUnit for unit and feature tests within Laravel
-- Playwright for API and UI end-to-end tests
+- Playwright for UI (storefront/admin) and API end-to-end tests

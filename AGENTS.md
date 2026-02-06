@@ -9,6 +9,7 @@ Lean guide for contributors and automation. Keep it small, keep it sharp.
 - Every change ships with tests for success, failure, and edge cases.
 - Keep documentation minimal, useful, and readable in a 70s hacker notebook tone.
 - When a task is completed, mark it as `[x]` in `TASKS.md`.
+- When a phase is completed, mark it as `[done]` in `PLAN.md`.
 
 ## PHP Strictness
 

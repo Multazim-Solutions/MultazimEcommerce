@@ -117,9 +117,9 @@
 - [ ] P12-T08 Feature tests for SSLCommerz success/fail/cancel
 - [ ] P12-T09 Unit tests for totals calculation
 - [ ] P12-T10 Unit tests for order status transitions
-- [ ] P12-T11 Playwright E2E for storefront and cart flows
-- [ ] P12-T12 Playwright E2E for admin workflows
-- [ ] P12-T13 Playwright API tests for health and checkout endpoints
+- [ ] P12-T11 Playwright UI E2E for storefront and cart flows
+- [ ] P12-T12 Playwright UI E2E for admin workflows
+- [ ] P12-T13 Playwright API E2E for health and checkout endpoints
 
 **Phase 13 - Documentation**
 
