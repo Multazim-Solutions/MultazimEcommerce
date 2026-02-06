@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
@@ -37,6 +38,15 @@ class GoogleController extends Controller
                 ]);
         }
 
+        $user = $this->resolveUser($googleUser);
+
+        Auth::login($user, true);
+
+        return redirect()->intended(route('dashboard'));
+    }
+
+    private function resolveUser(SocialiteUser $googleUser): User
+    {
         $user = User::where('google_id', $googleUser->getId())->first();
 
         if ($user === null && $googleUser->getEmail() !== null) {
@@ -44,7 +54,7 @@ class GoogleController extends Controller
         }
 
         if ($user === null) {
-            $user = User::create([
+            return User::create([
                 'name' => $googleUser->getName() ?? 'Google User',
                 'email' => $googleUser->getEmail() ?? Str::uuid().'@example.com',
                 'password' => Hash::make(Str::random(32)),
@@ -52,7 +62,9 @@ class GoogleController extends Controller
                 'email_verified_at' => now(),
                 'role' => 'customer',
             ]);
-        } elseif ($user->google_id === null) {
+        }
+
+        if ($user->google_id === null) {
             $user->google_id = $googleUser->getId();
 
             if ($user->email_verified_at === null) {
@@ -62,8 +74,6 @@ class GoogleController extends Controller
             $user->save();
         }
 
-        Auth::login($user, true);
-
-        return redirect()->intended(route('dashboard'));
+        return $user;
     }
 }
