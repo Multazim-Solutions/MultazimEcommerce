@@ -11,11 +11,11 @@
 
 **Phase 1 - Architecture & Routing**
 
-- [ ] P1-T01 Define web and API route groups
-- [ ] P1-T02 Add API version prefix (`/api/v1`)
-- [ ] P1-T03 Add request ID middleware
-- [ ] P1-T04 Add rate limiting rules (auth, checkout)
-- [ ] P1-T05 Create base controllers for storefront, admin, and API
+- [x] P1-T01 Define web and API route groups
+- [x] P1-T02 Add API version prefix (`/api/v1`)
+- [x] P1-T03 Add request ID middleware
+- [x] P1-T04 Add rate limiting rules (auth, checkout)
+- [x] P1-T05 Create base controllers for storefront, admin, and API
 
 **Phase 2 - Database & Models**
 
