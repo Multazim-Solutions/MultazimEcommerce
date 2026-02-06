@@ -8,18 +8,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProductImageRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Services\Images\ImageStorageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
-    public function store(StoreProductImageRequest $request, Product $product): RedirectResponse
+    public function store(StoreProductImageRequest $request, Product $product, ImageStorageService $storage): RedirectResponse
     {
-        $path = $request->file('image')->store("products/{$product->id}", 'public');
+        $path = $storage->storeProductOriginal($product, $request->file('image'));
 
         $product->images()->create([
             'path' => $path,
-            'alt_text' => $request->input('alt_text'),
+            'alt_text' => null,
             'sort_order' => 0,
         ]);
 
@@ -28,13 +29,13 @@ class ProductImageController extends Controller
             ->with('status', 'Image uploaded');
     }
 
-    public function destroy(Product $product, ProductImage $image): RedirectResponse
+    public function destroy(Product $product, ProductImage $image, ImageStorageService $storage): RedirectResponse
     {
         if ($image->product_id !== $product->id) {
             abort(404);
         }
 
-        Storage::disk('public')->delete($image->path);
+        Storage::disk('products')->delete($image->path);
         $image->delete();
 
         return redirect()
