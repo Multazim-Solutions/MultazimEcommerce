@@ -67,14 +67,14 @@
 
 **Phase 7 - Payments (SSLCommerz)**
 
-- [ ] P7-T01 Add payment service interface
-- [ ] P7-T02 Implement SSLCommerz gateway client
-- [ ] P7-T03 Initiate payment from checkout
-- [ ] P7-T04 Handle success callback
-- [ ] P7-T05 Handle failure callback
-- [ ] P7-T06 Handle cancel callback
-- [ ] P7-T07 Validate payment status with gateway
-- [ ] P7-T08 Ensure idempotent callbacks
+- [x] P7-T01 Add payment service interface
+- [x] P7-T02 Implement SSLCommerz gateway client
+- [x] P7-T03 Initiate payment from checkout
+- [x] P7-T04 Handle success callback
+- [x] P7-T05 Handle failure callback
+- [x] P7-T06 Handle cancel callback
+- [x] P7-T07 Validate payment status with gateway
+- [x] P7-T08 Ensure idempotent callbacks
 
 **Phase 8 - Image Storage**
 
