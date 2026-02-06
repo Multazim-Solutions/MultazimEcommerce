@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class CheckoutController extends Controller
 {
@@ -43,7 +44,7 @@ class CheckoutController extends Controller
         $total = $subtotal + $shipping + $tax;
 
         DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): void {
-            Order::create([
+            $order = Order::create([
                 'user_id' => $request->user()?->id,
                 'status' => 'pending',
                 'subtotal' => $subtotal,
@@ -54,6 +55,24 @@ class CheckoutController extends Controller
                 'payment_provider' => null,
                 'payment_ref' => null,
             ]);
+
+            foreach ($cart->items as $item) {
+                $product = $item->product;
+
+                if ($product === null) {
+                    throw ValidationException::withMessages([
+                        'cart' => 'One of the cart items is no longer available.',
+                    ]);
+                }
+
+                $order->items()->create([
+                    'product_id' => $product->id,
+                    'name_snapshot' => $product->name,
+                    'price_snapshot' => $product->price,
+                    'qty' => $item->qty,
+                    'line_total' => $item->qty * (float) $product->price,
+                ]);
+            }
         });
 
         return redirect()
