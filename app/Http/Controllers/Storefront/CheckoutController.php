@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Services\Payments\PaymentGateway;
 use App\Services\Payments\PaymentInitResponse;
+use App\Services\Orders\OrderTotalCalculator;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class CheckoutController extends Controller
         return view('storefront.checkout.show');
     }
 
-    public function store(CheckoutRequest $request, PaymentGateway $gateway): RedirectResponse
+    public function store(CheckoutRequest $request, PaymentGateway $gateway, OrderTotalCalculator $calculator): RedirectResponse
     {
         $request->validated();
         $cart = $this->resolveCart($request);
@@ -36,15 +37,11 @@ class CheckoutController extends Controller
                 ->withErrors(['cart' => 'Your cart is empty.']);
         }
 
-        $subtotal = $cart->items->sum(function ($item): float {
-            $price = (float) ($item->product?->price ?? 0);
-
-            return $price * $item->qty;
-        });
-
-        $shipping = 0;
-        $tax = 0;
-        $total = $subtotal + $shipping + $tax;
+        $totals = $calculator->calculate($cart->items, shipping: 0.0, tax: 0.0);
+        $subtotal = $totals->subtotal;
+        $shipping = $totals->shipping;
+        $tax = $totals->tax;
+        $total = $totals->total();
 
         $order = DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): Order {
             $order = Order::create([
