@@ -12,6 +12,9 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_CUSTOMER = 'customer';
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -60,5 +63,10 @@ class User extends Authenticatable
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 }
