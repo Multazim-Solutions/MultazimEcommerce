@@ -20,10 +20,12 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->appendToGroup('web', [
             \App\Http\Middleware\RequestId::class,
+            \App\Http\Middleware\LogContext::class,
         ]);
 
         $middleware->appendToGroup('api', [
             \App\Http\Middleware\RequestId::class,
+            \App\Http\Middleware\LogContext::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
