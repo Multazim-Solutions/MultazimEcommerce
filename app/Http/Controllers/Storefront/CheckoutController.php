@@ -65,6 +65,14 @@ class CheckoutController extends Controller
                     ]);
                 }
 
+                if ($product->stock_qty < $item->qty) {
+                    throw ValidationException::withMessages([
+                        'cart' => "Insufficient stock for {$product->name}.",
+                    ]);
+                }
+
+                $product->decrement('stock_qty', $item->qty);
+
                 $order->items()->create([
                     'product_id' => $product->id,
                     'name_snapshot' => $product->name,
