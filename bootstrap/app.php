@@ -19,13 +19,16 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->appendToGroup('web', [
+            \App\Http\Middleware\ForceHttps::class,
             \App\Http\Middleware\RequestId::class,
             \App\Http\Middleware\LogContext::class,
+            \App\Http\Middleware\FrameHeaders::class,
         ]);
 
         $middleware->appendToGroup('api', [
             \App\Http\Middleware\RequestId::class,
             \App\Http\Middleware\LogContext::class,
+            \App\Http\Middleware\FrameHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
