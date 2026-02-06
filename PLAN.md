@@ -4,6 +4,7 @@
 - Phase 2 - Database & Models [done]
 - Phase 3 - Authentication & Authorization [done]
 - Phase 4 - Storefront (Web + API) [done]
+- Phase 5 - Orders & Checkout [done]
 
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints

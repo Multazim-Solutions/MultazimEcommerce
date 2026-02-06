@@ -51,10 +51,10 @@
 
 **Phase 5 - Orders & Checkout**
 
-- [ ] P5-T01 Create order from cart
-- [ ] P5-T02 Calculate totals (subtotal, tax, shipping)
-- [ ] P5-T03 Persist order items with snapshots
-- [ ] P5-T04 Update stock on order placement
+- [x] P5-T01 Create order from cart
+- [x] P5-T02 Calculate totals (subtotal, tax, shipping)
+- [x] P5-T03 Persist order items with snapshots
+- [x] P5-T04 Update stock on order placement
 
 **Phase 6 - Admin Dashboard**
 
