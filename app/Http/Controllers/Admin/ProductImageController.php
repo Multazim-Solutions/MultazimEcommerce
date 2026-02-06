@@ -19,7 +19,7 @@ class ProductImageController extends Controller
 
         $product->images()->create([
             'path' => $path,
-            'alt_text' => null,
+            'alt_text' => $request->input('alt_text'),
             'sort_order' => 0,
         ]);
 
