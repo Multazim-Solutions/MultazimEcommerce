@@ -13,6 +13,11 @@ fi
 if [ -f artisan ]; then
   if [ -z "${APP_KEY:-}" ] && [ "${APP_ENV:-}" != "production" ]; then
     php artisan key:generate --force || true
+
+    if [ -z "${APP_KEY:-}" ] && [ -f .env ]; then
+      APP_KEY="$(grep -E '^APP_KEY=' .env | head -n1 | cut -d= -f2-)"
+      export APP_KEY
+    fi
   fi
 
   php artisan storage:link || true
