@@ -100,10 +100,10 @@
 
 **Phase 11 - Security & Hardening**
 
-- [ ] P11-T01 Enforce Form Request validation on inputs
-- [ ] P11-T02 Configure CSRF protection for web
-- [ ] P11-T03 Add file upload MIME and size limits
-- [ ] P11-T04 Harden session and cookie settings
+- [x] P11-T01 Enforce Form Request validation on inputs
+- [x] P11-T02 Configure CSRF protection for web
+- [x] P11-T03 Add file upload MIME and size limits
+- [x] P11-T04 Harden session and cookie settings
 
 **Phase 12 - Testing**
 
