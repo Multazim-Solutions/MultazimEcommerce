@@ -21,6 +21,14 @@ if [ -f artisan ]; then
   fi
 
   php artisan storage:link || true
+
+  if [ "${APP_ENV:-}" != "production" ]; then
+    php artisan migrate --force
+
+    if [ "${APP_SEED_ON_START:-}" = "1" ]; then
+      php artisan db:seed --force
+    fi
+  fi
 fi
 
 exec "$@"
