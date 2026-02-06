@@ -1,0 +1,12 @@
+.git
+node_modules
+vendor
+storage
+bootstrap/cache
+public/storage
+public/build
+.env
+.env.*
+Dockerfile
+Dockerfile.*
+docker-compose.yml
