@@ -7,6 +7,7 @@ Lean guide for contributors and automation. Keep it small, keep it sharp.
 - Favor clarity over cleverness. Small, composable classes.
 - Every change ships with tests for success, failure, and edge cases.
 - Keep documentation minimal, useful, and readable in a 70s hacker notebook tone.
+- When a phase or task is completed, mark it as `[done]` in `PLAN.md`.
 
 ## PHP Strictness
 - Add `declare(strict_types=1);` at the top of PHP files where possible.

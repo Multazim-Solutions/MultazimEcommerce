@@ -8,6 +8,7 @@
 /.vscode
 .env
 .env.*
+.env.prod
 .phpunit.result.cache
 npm-debug.log
 yarn-error.log

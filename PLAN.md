@@ -1,3 +1,6 @@
+**Progress**
+- Phase 0 - Project Setup [done]
+
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints
 - API-first design: storefront and admin consume shared JSON APIs; Blade (or lightweight JS) renders UI
