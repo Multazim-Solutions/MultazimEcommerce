@@ -59,6 +59,7 @@ Simple, modern e-commerce platform for Bangladesh. Built to move fast now and sc
 ## Deployment On cPanel
 - Use cPanel File Manager or Git deployment to upload the project
 - Set the web root to `public/`
+- If required, point `public_html` to `public/` via symlink or document root setting
 - Ensure PHP version matches Laravel requirements
 - Configure `.env` with production settings
 - Run migrations from terminal (if available) or via a one-time CLI task
