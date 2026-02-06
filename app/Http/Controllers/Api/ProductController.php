@@ -19,4 +19,11 @@ class ProductController extends Controller
 
         return response()->json($products);
     }
+
+    public function show(Product $product): JsonResponse
+    {
+        $product->load('images');
+
+        return response()->json($product);
+    }
 }

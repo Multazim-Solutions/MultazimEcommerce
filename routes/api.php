@@ -11,4 +11,5 @@ Route::prefix('v1')
     ->group(function () {
         Route::get('/health', [HealthController::class, 'show'])->name('health');
         Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
     });
