@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateOrderStatusRequest;
 use App\Models\Order;
+use App\Services\Orders\OrderStatusManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -33,9 +34,9 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(UpdateOrderStatusRequest $request, Order $order): RedirectResponse
+    public function update(UpdateOrderStatusRequest $request, Order $order, OrderStatusManager $statusManager): RedirectResponse
     {
-        $order->update($request->validated());
+        $statusManager->apply($order, $request->validated()['status']);
 
         return redirect()
             ->route('admin.orders.show', $order)
