@@ -1,19 +1,3 @@
-**Progress**
-- Phase 0 - Project Setup [done]
-- Phase 1 - Architecture & Routing [done]
-- Phase 2 - Database & Models [done]
-- Phase 3 - Authentication & Authorization [done]
-- Phase 4 - Storefront (Web + API) [done]
-- Phase 5 - Orders & Checkout [done]
-- Phase 6 - Admin Dashboard [done]
-- Phase 7 - Payments (SSLCommerz) [done]
-- Phase 8 - Image Storage [done]
-- Phase 9 - Logging [done]
-- Phase 10 - Docker & Deployment [done]
-- Phase 11 - Security & Hardening [done]
-- Phase 12 - Testing [done]
-- Phase 13 - Documentation [done]
-
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints
 - API-first design: storefront and admin consume shared JSON APIs; Blade (or lightweight JS) renders UI
@@ -118,3 +102,31 @@
 **Testing Strategy**
 - PHPUnit for unit and feature tests within Laravel
 - Playwright for UI (storefront/admin) and API end-to-end tests
+
+**UI/UX Roadmap (Tailwind + Flowbite)**
+- Direction: minimal, fast, low-motion, ecommerce-first UI
+- Stack: Tailwind CSS + Flowbite components (customized), tiny utility helpers only
+- Motion: no heavy animation; only subtle state transitions (hover/focus/disabled)
+- Accessibility: keyboard-first flows, visible focus, high-contrast defaults
+
+**Phased UI Plan**
+- [todo] **Phase 14 - Design System + Layout**
+  - Establish tokens (color, spacing, typography) and base layout grids
+  - Create reusable UI components (buttons, inputs, cards, badges, tables)
+  - Add app chrome: header, footer, nav, admin sidebar
+  - Wire Tailwind + Flowbite config and component overrides
+- [todo] **Phase 15 - Storefront UI**
+  - Product list + filters, product detail, cart, checkout
+  - Empty/loading/error states for all storefront screens
+  - Mobile-first responsive polish for storefront
+- [todo] **Phase 16 - Admin UI**
+  - Admin auth screens, dashboard, product CRUD, order management
+  - Image upload UI with previews and validation feedback
+  - Data tables with paging, search, and status chips
+- [todo] **Phase 17 - UX + Accessibility**
+  - Performance pass (reduce layout shift, optimize images)
+  - Keyboard navigation and ARIA for complex widgets
+  - Consistent form validation UX across app
+- [todo] **Phase 18 - UI E2E Tests + QA**
+  - Playwright flows for storefront and admin UI
+  - Visual sanity checks (no skeleton-only pages)
