@@ -86,9 +86,9 @@
 
 **Phase 9 - Logging**
 
-- [ ] P9-T01 Configure JSON log formatter
-- [ ] P9-T02 Add `app`, `payments`, `auth` log channels
-- [ ] P9-T03 Enrich logs with request/user/order context
+- [x] P9-T01 Configure JSON log formatter
+- [x] P9-T02 Add `app`, `payments`, `auth` log channels
+- [x] P9-T03 Enrich logs with request/user/order context
 
 **Phase 10 - Docker & Deployment**
 
