@@ -107,19 +107,19 @@
 
 **Phase 12 - Testing**
 
-- [ ] P12-T01 Feature tests for storefront list and details
-- [ ] P12-T02 Feature tests for cart add/remove/update
-- [ ] P12-T03 Feature tests for checkout validation
-- [ ] P12-T04 Feature tests for admin auth guard
-- [ ] P12-T05 Feature tests for product CRUD
-- [ ] P12-T06 Feature tests for order management
-- [ ] P12-T07 Feature tests for image upload
-- [ ] P12-T08 Feature tests for SSLCommerz success/fail/cancel
-- [ ] P12-T09 Unit tests for totals calculation
-- [ ] P12-T10 Unit tests for order status transitions
-- [ ] P12-T11 Playwright UI E2E for storefront and cart flows
-- [ ] P12-T12 Playwright UI E2E for admin workflows
-- [ ] P12-T13 Playwright API E2E for health and checkout endpoints
+- [x] P12-T01 Feature tests for storefront list and details
+- [x] P12-T02 Feature tests for cart add/remove/update
+- [x] P12-T03 Feature tests for checkout validation
+- [x] P12-T04 Feature tests for admin auth guard
+- [x] P12-T05 Feature tests for product CRUD
+- [x] P12-T06 Feature tests for order management
+- [x] P12-T07 Feature tests for image upload
+- [x] P12-T08 Feature tests for SSLCommerz success/fail/cancel
+- [x] P12-T09 Unit tests for totals calculation
+- [x] P12-T10 Unit tests for order status transitions
+- [x] P12-T11 Playwright UI E2E for storefront and cart flows
+- [x] P12-T12 Playwright UI E2E for admin workflows
+- [x] P12-T13 Playwright API E2E for health and checkout endpoints
 
 **Phase 13 - Documentation**
 
