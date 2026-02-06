@@ -10,7 +10,6 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Services\Images\ImageStorageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
@@ -35,7 +34,7 @@ class ProductImageController extends Controller
             abort(404);
         }
 
-        Storage::disk('products')->delete($image->path);
+        $storage->deleteProductImage($image);
         $image->delete();
 
         return redirect()
