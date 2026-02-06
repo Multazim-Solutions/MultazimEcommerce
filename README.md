@@ -74,6 +74,7 @@ Simple, modern e-commerce platform for Bangladesh. Built to move fast now and sc
 - Keep docs lean and useful
 - Follow `AGENTS.md` for coding and testing rules
 - Keep Laravel conventions; avoid over-engineering
+- See `PLAN.md` and `TASKS.md` for roadmap and execution flow
 
 ## Commit Convention
 - Format: `feat/refactor/fix[phase_id-task-id]: message, loong message`
