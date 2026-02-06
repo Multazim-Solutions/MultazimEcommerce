@@ -1,6 +1,7 @@
 **Progress**
 - Phase 0 - Project Setup [done]
 - Phase 1 - Architecture & Routing [done]
+- Phase 2 - Database & Models [done]
 
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints

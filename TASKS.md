@@ -19,15 +19,15 @@
 
 **Phase 2 - Database & Models**
 
-- [ ] P2-T01 Create migrations for users
-- [ ] P2-T02 Create migrations for products
-- [ ] P2-T03 Create migrations for product_images
-- [ ] P2-T04 Create migrations for orders
-- [ ] P2-T05 Create migrations for order_items
-- [ ] P2-T06 Create migrations for carts (optional)
-- [ ] P2-T07 Create migrations for cart_items (optional)
-- [ ] P2-T08 Create Eloquent models with relationships
-- [ ] P2-T09 Add factories and seeders for test data
+- [x] P2-T01 Create migrations for users
+- [x] P2-T02 Create migrations for products
+- [x] P2-T03 Create migrations for product_images
+- [x] P2-T04 Create migrations for orders
+- [x] P2-T05 Create migrations for order_items
+- [x] P2-T06 Create migrations for carts (optional)
+- [x] P2-T07 Create migrations for cart_items (optional)
+- [x] P2-T08 Create Eloquent models with relationships
+- [x] P2-T09 Add factories and seeders for test data
 
 **Phase 3 - Authentication & Authorization**
 
