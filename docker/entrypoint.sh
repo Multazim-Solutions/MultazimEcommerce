@@ -23,10 +23,10 @@ if [ -f artisan ]; then
   php artisan storage:link || true
 
   if [ "${APP_ENV:-}" != "production" ]; then
-    php artisan migrate --force
-
     if [ "${APP_SEED_ON_START:-}" = "1" ]; then
-      php artisan db:seed --force
+      php artisan migrate:fresh --seed --force
+    else
+      php artisan migrate --force
     fi
   fi
 fi
