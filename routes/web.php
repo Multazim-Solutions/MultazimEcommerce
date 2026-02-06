@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Storefront\CartController;
 use App\Http\Controllers\Storefront\CheckoutController;
+use App\Http\Controllers\Payments\SslCommerzController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Storefront\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::prefix('payments/sslcommerz')
+    ->name('payments.sslcommerz.')
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+    ->group(function () {
+        Route::match(['get', 'post'], '/success', [SslCommerzController::class, 'success'])->name('success');
+        Route::match(['get', 'post'], '/fail', [SslCommerzController::class, 'fail'])->name('fail');
+        Route::match(['get', 'post'], '/cancel', [SslCommerzController::class, 'cancel'])->name('cancel');
+        Route::match(['get', 'post'], '/ipn', [SslCommerzController::class, 'ipn'])->name('ipn');
+    });
 
 require __DIR__.'/auth.php';
