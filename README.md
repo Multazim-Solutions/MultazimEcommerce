@@ -21,33 +21,45 @@ Simple, modern e-commerce platform for Bangladesh. Built to move fast now and sc
 - Structured logging (JSON)
 - AI tooling: Laravel Boost (assists AI-driven codegen, refactors, tests)
 
-## Quick Start (Local, Docker)
-1. Copy env file
-- `cp .env.example .env`
-2. Build and run
-- `docker compose up --build`
-3. App will be available at
-- `http://localhost:8080` (expected)
+## Docker Setup
+- Services: `app` (PHP-FPM), `web` (Nginx)
+- Optional services in future: `queue`, `scheduler`
+- Volumes: `storage/` for uploads, SQLite DB file volume
+- Env: use `.env` for local, `.env.prod` for production
+
+## Quick Start (Docker)
+1. `cp .env.example .env`
+2. `docker compose up --build`
+3. Open `http://localhost:8080`
+
+## Run Guide (Local, Non-Docker)
+1. Install PHP and Composer
+2. `composer install`
+3. `cp .env.example .env`
+4. `php artisan key:generate`
+5. `php artisan migrate`
+6. `php artisan serve`
 
 ## Environment
 - Edit `.env` for runtime values
-- Set Google OAuth keys (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`)
-- Set SSLCommerz keys and callbacks (`SSLCOMMERZ_STORE_ID`, `SSLCOMMERZ_STORE_PASSWORD`, `SSLCOMMERZ_*_URL`)
+- Set Google OAuth keys: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`
+- Set SSLCommerz keys and callbacks: `SSLCOMMERZ_STORE_ID`, `SSLCOMMERZ_STORE_PASSWORD`, `SSLCOMMERZ_*_URL`
 
-## Local (Non-Docker)
-1. Install PHP and Composer
-2. Install dependencies
-- `composer install`
-3. Set up environment
-- `cp .env.example .env`
-- `php artisan key:generate`
-4. Run migrations
-- `php artisan migrate`
-5. Start server
-- `php artisan serve`
+## API Notes (Minimal)
+- `GET /api/v1/health` -> `{ "status": "ok" }`
+- `GET /api/v1/products` -> product list
+- `GET /api/v1/products/{slug}` -> product detail
+- Cart endpoints require Sanctum auth
+- `POST /api/v1/cart/items` -> add item
+- `PATCH /api/v1/cart/items/{id}` -> update qty
+- `DELETE /api/v1/cart/items/{id}` -> remove
 
 ## Tests
-- `php artisan test`
+- PHPUnit: `php artisan test`
+- Playwright (UI + API): `npm run test:e2e`
+- Playwright expects a running app
+- Required env for E2E: `PLAYWRIGHT_BASE_URL`
+- Admin UI E2E needs `E2E_ADMIN_EMAIL` and `E2E_ADMIN_PASSWORD`
 
 ## Deployment
 - Build containers in CI or on server

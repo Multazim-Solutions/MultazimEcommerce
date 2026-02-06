@@ -123,6 +123,9 @@
 
 **Phase 13 - Documentation**
 
-- [ ] P13-T01 Update README with run/test/deploy steps
-- [ ] P13-T02 Add minimal API usage notes
-- [ ] P13-T03 Keep AGENTS rules current
+- [x] P13-T01 Update README with run/test/deploy steps
+- [x] P13-T02 Add minimal API usage notes
+- [x] P13-T03 Keep AGENTS rules current
+- [x] P13-T04 Document Docker setup and services
+- [x] P13-T05 Document run guide (local + docker)
+- [x] P13-T06 Document testing guide (PHPUnit + Playwright)
