@@ -58,12 +58,12 @@
 
 **Phase 6 - Admin Dashboard**
 
-- [ ] P6-T01 Admin auth-protected layout
-- [ ] P6-T02 Product CRUD endpoints
-- [ ] P6-T03 Product CRUD UI
-- [ ] P6-T04 Order list and detail views
-- [ ] P6-T05 Order status update flow
-- [ ] P6-T06 Image upload and management UI
+- [x] P6-T01 Admin auth-protected layout
+- [x] P6-T02 Product CRUD endpoints
+- [x] P6-T03 Product CRUD UI
+- [x] P6-T04 Order list and detail views
+- [x] P6-T05 Order status update flow
+- [x] P6-T06 Image upload and management UI
 
 **Phase 7 - Payments (SSLCommerz)**
 
