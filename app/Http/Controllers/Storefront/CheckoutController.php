@@ -32,14 +32,24 @@ class CheckoutController extends Controller
                 ->withErrors(['cart' => 'Your cart is empty.']);
         }
 
-        DB::transaction(function () use ($cart, $request): void {
+        $subtotal = $cart->items->sum(function ($item): float {
+            $price = (float) ($item->product?->price ?? 0);
+
+            return $price * $item->qty;
+        });
+
+        $shipping = 0;
+        $tax = 0;
+        $total = $subtotal + $shipping + $tax;
+
+        DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): void {
             Order::create([
                 'user_id' => $request->user()?->id,
                 'status' => 'pending',
-                'subtotal' => 0,
-                'shipping' => 0,
-                'tax' => 0,
-                'total' => 0,
+                'subtotal' => $subtotal,
+                'shipping' => $shipping,
+                'tax' => $tax,
+                'total' => $total,
                 'currency' => $cart->items->first()?->product?->currency ?? 'BDT',
                 'payment_provider' => null,
                 'payment_ref' => null,
