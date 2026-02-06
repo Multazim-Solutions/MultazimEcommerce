@@ -92,11 +92,11 @@
 
 **Phase 10 - Docker & Deployment**
 
-- [ ] P10-T01 Create Dockerfile for app
-- [ ] P10-T02 Create Nginx config
-- [ ] P10-T03 Create `docker-compose.yml`
-- [ ] P10-T04 Add volume mounts for `storage/` and SQLite
-- [ ] P10-T05 Document cPanel deployment path and web root
+- [x] P10-T01 Create Dockerfile for app
+- [x] P10-T02 Create Nginx config
+- [x] P10-T03 Create `docker-compose.yml`
+- [x] P10-T04 Add volume mounts for `storage/` and SQLite
+- [x] P10-T05 Document cPanel deployment path and web root
 
 **Phase 11 - Security & Hardening**
 

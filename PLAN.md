@@ -9,6 +9,7 @@
 - Phase 7 - Payments (SSLCommerz) [done]
 - Phase 8 - Image Storage [done]
 - Phase 9 - Logging [done]
+- Phase 10 - Docker & Deployment [done]
 
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints
