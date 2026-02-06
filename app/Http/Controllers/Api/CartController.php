@@ -72,18 +72,15 @@ class CartController extends Controller
     private function resolveCart(Request $request): Cart
     {
         $user = $request->user();
-        $sessionId = $request->session()->getId();
+        $sessionId = $request->hasSession() ? $request->session()->getId() : null;
 
-        if ($user !== null) {
-            return Cart::firstOrCreate(
-                ['user_id' => $user->id],
-                ['session_id' => $sessionId]
-            );
+        if ($user === null) {
+            abort(401);
         }
 
         return Cart::firstOrCreate(
-            ['session_id' => $sessionId],
-            ['user_id' => null]
+            ['user_id' => $user->id],
+            ['session_id' => $sessionId]
         );
     }
 
