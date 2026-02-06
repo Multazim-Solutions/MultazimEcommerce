@@ -12,6 +12,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
 use App\Policies\ProductPolicy;
 use App\Models\User;
+use App\Services\Payments\PaymentGateway;
+use App\Services\Payments\SslCommerzGateway;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PaymentGateway::class, SslCommerzGateway::class);
     }
 
     /**
