@@ -8,9 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Services\Payments\PaymentGateway;
+use App\Services\Payments\PaymentInitResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
 
@@ -21,7 +24,7 @@ class CheckoutController extends Controller
         return view('storefront.checkout.show');
     }
 
-    public function store(CheckoutRequest $request): RedirectResponse
+    public function store(CheckoutRequest $request, PaymentGateway $gateway): RedirectResponse
     {
         $request->validated();
         $cart = $this->resolveCart($request);
@@ -43,7 +46,7 @@ class CheckoutController extends Controller
         $tax = 0;
         $total = $subtotal + $shipping + $tax;
 
-        DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): void {
+        $order = DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): Order {
             $order = Order::create([
                 'user_id' => $request->user()?->id,
                 'status' => 'pending',
@@ -81,11 +84,26 @@ class CheckoutController extends Controller
                     'line_total' => $item->qty * (float) $product->price,
                 ]);
             }
+
+            return $order;
         });
 
-        return redirect()
-            ->route('storefront.checkout.show')
-            ->with('status', 'Order created');
+        try {
+            $init = $gateway->initiate($order, $this->customerPayload($request), $this->callbackUrls());
+        } catch (\Throwable $exception) {
+            Log::error('Payment initiation failed', [
+                'order_id' => $order->id,
+                'error' => $exception->getMessage(),
+            ]);
+
+            return redirect()
+                ->route('storefront.checkout.show')
+                ->withErrors(['payment' => 'Unable to start payment. Please try again.']);
+        }
+
+        $this->attachPaymentRef($order, $init);
+
+        return redirect()->away($init->redirectUrl);
     }
 
     private function resolveCart(Request $request): Cart
@@ -104,5 +122,38 @@ class CheckoutController extends Controller
             ['session_id' => $sessionId],
             ['user_id' => null]
         );
+    }
+
+    private function customerPayload(Request $request): array
+    {
+        $data = $request->validated();
+
+        return [
+            'name' => $data['full_name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address_line1' => $data['address_line1'],
+            'address_line2' => $data['address_line2'] ?? null,
+            'city' => $data['city'],
+            'postal_code' => $data['postal_code'],
+        ];
+    }
+
+    private function callbackUrls(): array
+    {
+        return [
+            'success' => route('payments.sslcommerz.success'),
+            'fail' => route('payments.sslcommerz.fail'),
+            'cancel' => route('payments.sslcommerz.cancel'),
+            'ipn' => route('payments.sslcommerz.ipn'),
+        ];
+    }
+
+    private function attachPaymentRef(Order $order, PaymentInitResponse $init): void
+    {
+        $order->update([
+            'payment_provider' => 'sslcommerz',
+            'payment_ref' => $init->sessionKey ?? $init->tranId,
+        ]);
     }
 }

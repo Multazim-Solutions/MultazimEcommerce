@@ -11,6 +11,16 @@
             </div>
         @endif
 
+        @if ($errors->has('cart') || $errors->has('payment'))
+            <div class="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">
+                @foreach (['cart', 'payment'] as $key)
+                    @foreach ($errors->get($key) as $message)
+                        <div>{{ $message }}</div>
+                    @endforeach
+                @endforeach
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('storefront.checkout.store') }}" class="space-y-4">
             @csrf
 
