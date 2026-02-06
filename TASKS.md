@@ -78,11 +78,11 @@
 
 **Phase 8 - Image Storage**
 
-- [ ] P8-T01 Configure filesystem disk for products
-- [ ] P8-T02 Store images under product directory
-- [ ] P8-T03 Generate thumbnails and resized variants
-- [ ] P8-T04 Persist image metadata
-- [ ] P8-T05 Serve images via `public/storage`
+- [x] P8-T01 Configure filesystem disk for products
+- [x] P8-T02 Store images under product directory
+- [x] P8-T03 Generate thumbnails and resized variants
+- [x] P8-T04 Persist image metadata
+- [x] P8-T05 Serve images via `public/storage`
 
 **Phase 9 - Logging**
 

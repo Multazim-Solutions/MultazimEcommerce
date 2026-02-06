@@ -7,6 +7,7 @@
 - Phase 5 - Orders & Checkout [done]
 - Phase 6 - Admin Dashboard [done]
 - Phase 7 - Payments (SSLCommerz) [done]
+- Phase 8 - Image Storage [done]
 
 **High-Level Architecture**
 - Laravel monolith with clear separation between Web UI and API endpoints
