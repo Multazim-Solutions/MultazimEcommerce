@@ -58,9 +58,9 @@ Lean guide for contributors and automation. Keep it small, keep it sharp.
 - Docs updated only where needed and kept lean.
 
 ## Commit Convention
-- Format: `feat/refactor/fix[phase_id-task-id]: message, loong message`
+- Format: `feat/refactor/fix[phase_id-task-id]: short message`
 - Optional: add a second line with further description if needed
-- Example: `fix[P7-T08]: idempotent payment callback, loong message`
+- Example: `fix[P7-T08]: idempotent payment callback`
 - Branching: no new branches for now; all work happens on `master`
 
 ## Useful Commands

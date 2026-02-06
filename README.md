@@ -77,7 +77,7 @@ Simple, modern e-commerce platform for Bangladesh. Built to move fast now and sc
 - See `PLAN.md` and `TASKS.md` for roadmap and execution flow
 
 ## Commit Convention
-- Format: `feat/refactor/fix[phase_id-task-id]: message, loong message`
+- Format: `feat/refactor/fix[phase_id-task-id]: short message`
 - Optional: add a second line with further description if needed
-- Example: `feat[P4-T03]: storefront list view, loong message`
+- Example: `feat[P4-T03]: storefront list view`
 - Branching: no new branches for now; all work happens on `master`
