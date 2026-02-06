@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Storefront\CartController;
 use App\Http\Controllers\Storefront\CheckoutController;
 use App\Http\Controllers\Payments\SslCommerzController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Storefront\ProductController;
+use App\Http\Controllers\Storefront\ProductController as StorefrontProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('storefront.')
     ->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('home');
-        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-        Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+        Route::get('/', [StorefrontProductController::class, 'index'])->name('home');
+        Route::get('/products', [StorefrontProductController::class, 'index'])->name('products.index');
+        Route::get('/products/{product:slug}', [StorefrontProductController::class, 'show'])->name('products.show');
 
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
         Route::post('/cart/items', [CartController::class, 'store'])->name('cart.add');
@@ -38,7 +38,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::resource('products', ProductController::class)->except(['show']);
+        Route::resource('products', AdminProductController::class)->except(['show']);
         Route::post('products/{product}/images', [ProductImageController::class, 'store'])->name('products.images.store');
         Route::delete('products/{product}/images/{image}', [ProductImageController::class, 'destroy'])->name('products.images.destroy');
 
