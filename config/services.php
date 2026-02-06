@@ -43,4 +43,10 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
 
+    'sslcommerz' => [
+        'store_id' => env('SSLCOMMERZ_STORE_ID', 'mock_store_id'),
+        'store_password' => env('SSLCOMMERZ_STORE_PASSWORD', 'mock_store_password'),
+        'sandbox' => env('SSLCOMMERZ_SANDBOX', true),
+    ],
+
 ];
