@@ -28,7 +28,7 @@
         <div class="mt-4 grid gap-3 sm:grid-cols-3">
             @foreach ($product->images as $image)
                 <div class="rounded border border-gray-200 p-2">
-                    <img class="w-full h-32 object-cover" src="{{ asset('storage/'.$image->path) }}" alt="{{ $image->alt_text }}">
+                    <img class="w-full h-32 object-cover" src="{{ \Illuminate\Support\Facades\Storage::disk('products')->url($image->path) }}" alt="{{ $image->alt_text }}">
                     <form method="POST" action="{{ route('admin.products.images.destroy', [$product, $image]) }}" class="mt-2">
                         @csrf
                         @method('DELETE')
