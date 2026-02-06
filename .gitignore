@@ -10,6 +10,7 @@
 .env
 .env.*
 .env.prod
+!.env.testing
 .phpunit.result.cache
 npm-debug.log
 yarn-error.log

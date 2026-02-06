@@ -6,6 +6,7 @@ namespace Tests\Feature\Storefront;
 
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +20,9 @@ class CartTest extends TestCase
             'price' => 199.99,
         ]);
 
-        $this->post(route('storefront.cart.add'), [
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post(route('storefront.cart.add'), [
             'product_id' => $product->id,
             'qty' => 2,
         ])->assertRedirect(route('storefront.cart.index'));
@@ -27,7 +30,7 @@ class CartTest extends TestCase
         $cartItem = CartItem::query()->firstOrFail();
         $this->assertSame(2, $cartItem->qty);
 
-        $this->patch(route('storefront.cart.update', $cartItem), [
+        $this->actingAs($user)->patch(route('storefront.cart.update', $cartItem), [
             'qty' => 3,
         ])->assertRedirect(route('storefront.cart.index'));
 
@@ -36,7 +39,7 @@ class CartTest extends TestCase
             'qty' => 3,
         ]);
 
-        $this->delete(route('storefront.cart.remove', $cartItem))
+        $this->actingAs($user)->delete(route('storefront.cart.remove', $cartItem))
             ->assertRedirect(route('storefront.cart.index'));
 
         $this->assertDatabaseMissing('cart_items', [
