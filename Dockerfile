@@ -19,12 +19,14 @@ RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-scripts
 
 COPY . .
 
-RUN mkdir -p storage bootstrap/cache database \
+RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache database \
     && touch database/database.sqlite \
     && php artisan package:discover --ansi \
     && php artisan storage:link || true \
     && chown -R www-data:www-data storage bootstrap/cache database
 
-USER www-data
+COPY docker/entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
+ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
