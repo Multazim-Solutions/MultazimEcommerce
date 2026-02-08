@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --brand-50: 253 248 232;
+        --brand-100: 247 231 198;
+        --brand-200: 237 206 141;
+        --brand-300: 224 174 93;
+        --brand-400: 205 146 57;
+        --brand-500: 184 132 44;
+        --brand-600: 154 107 33;
+        --brand-700: 121 84 24;
+        --brand-800: 84 58 15;
+        --brand-900: 46 32 7;
+
+        --accent-50: 232 248 250;
+        --accent-100: 196 237 241;
+        --accent-200: 141 216 224;
+        --accent-300: 88 190 202;
+        --accent-400: 44 165 179;
+        --accent-500: 14 116 144;
+        --accent-600: 12 94 118;
+        --accent-700: 11 75 96;
+        --accent-800: 10 58 74;
+        --accent-900: 8 40 52;
+
+        --sand-50: 252 249 244;
+        --sand-100: 247 241 231;
+        --sand-200: 236 228 212;
+        --sand-300: 223 212 194;
+        --sand-400: 198 186 166;
+        --sand-500: 156 145 130;
+
+        --ink-900: 16 18 23;
+        --ink-700: 37 42 52;
+        --ink-500: 74 82 99;
+
+        --muted: 98 106 121;
+        --border: 221 210 190;
+
+        --success-100: 209 241 223;
+        --success-500: 25 135 84;
+        --success-700: 18 102 62;
+
+        --danger-100: 248 214 214;
+        --danger-500: 195 49 47;
+        --danger-700: 149 32 32;
+
+        --warning-100: 254 233 196;
+        --warning-500: 217 119 6;
+        --warning-700: 161 98 7;
+    }
+
+    body {
+        @apply bg-sand-50 text-ink-900 antialiased;
+    }
+
+    ::selection {
+        @apply bg-brand-200 text-ink-900;
+    }
+}
+
+@layer components {
+    .ui-ring {
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
+    }
+}

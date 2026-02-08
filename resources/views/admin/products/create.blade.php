@@ -1,16 +1,21 @@
 <x-admin-layout>
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-semibold text-gray-900">New Product</h1>
-        <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('admin.products.index') }}">Back</a>
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-muted">Catalog</p>
+            <h1 class="font-display text-2xl text-ink-900">New Product</h1>
+        </div>
+        <a class="rounded-full border border-sand-200 px-3 py-1.5 text-sm font-medium text-ink-700 transition hover:border-sand-300 hover:text-ink-900" href="{{ route('admin.products.index') }}">Back</a>
     </div>
 
-    <form method="POST" action="{{ route('admin.products.store') }}" class="space-y-4">
-        @csrf
+    <x-ui.card>
+        <form method="POST" action="{{ route('admin.products.store') }}" class="space-y-4">
+            @csrf
 
-        @include('admin.products.partials.form', ['product' => null])
+            @include('admin.products.partials.form', ['product' => null])
 
-        <div class="flex justify-end">
-            <x-primary-button>Create</x-primary-button>
-        </div>
-    </form>
+            <div class="flex justify-end">
+                <x-primary-button>Create</x-primary-button>
+            </div>
+        </form>
+    </x-ui.card>
 </x-admin-layout>

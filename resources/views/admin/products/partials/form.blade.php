@@ -12,7 +12,7 @@
 
 <div>
     <x-input-label for="description" :value="__('Description')" />
-    <textarea id="description" name="description" class="mt-1 w-full rounded border-gray-300" rows="4">{{ old('description', $product?->description) }}</textarea>
+    <textarea id="description" name="description" class="mt-1 w-full rounded-xl border border-sand-200 bg-white px-3 py-2 text-sm text-ink-900 shadow-sm focus:border-accent-500 focus:ring-accent-500 ui-ring" rows="4">{{ old('description', $product?->description) }}</textarea>
     <x-input-error :messages="$errors->get('description')" class="mt-2" />
 </div>
 
@@ -37,10 +37,10 @@
     </div>
     <div>
         <x-input-label for="is_active" :value="__('Active')" />
-        <select id="is_active" name="is_active" class="mt-1 w-full rounded border-gray-300">
+        <x-select-input id="is_active" name="is_active" class="mt-1 w-full">
             <option value="1" @selected(old('is_active', $product?->is_active ?? true))>Yes</option>
             <option value="0" @selected(! old('is_active', $product?->is_active ?? true))>No</option>
-        </select>
+        </x-select-input>
         <x-input-error :messages="$errors->get('is_active')" class="mt-2" />
     </div>
 </div>

@@ -40,7 +40,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="text-sm text-muted hover:text-ink-900 ui-ring" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
@@ -51,7 +51,7 @@
     </form>
 
     <div class="mt-6">
-        <a href="{{ route('google.redirect') }}" class="w-full inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+        <a href="{{ route('google.redirect') }}" class="w-full inline-flex items-center justify-center rounded-xl border border-sand-200 bg-white px-4 py-2 text-sm font-medium text-ink-700 shadow-sm transition hover:bg-sand-100 ui-ring">
             {{ __('Continue with Google') }}
         </a>
     </div>

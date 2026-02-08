@@ -2,13 +2,13 @@
 
 **Phase 14 - Design System + Layout**
 
-- [ ] P14-T01 Define UI tokens (color, type, spacing, radii, shadows)
-- [ ] P14-T01a Extract logo palette + define high-contrast UX pairs
-- [ ] P14-T01b Logo usage guide (light/dark, clear space, min size)
-- [ ] P14-T02 Tailwind + Flowbite setup and component overrides
-- [ ] P14-T03 Core components: buttons, inputs, selects, badges, cards
-- [ ] P14-T04 App chrome: header, footer, nav, admin sidebar
-- [ ] P14-T05 Tables, empty states, loading states, alerts
+- [x] P14-T01 Define UI tokens (color, type, spacing, radii, shadows)
+- [x] P14-T01a Extract logo palette + define high-contrast UX pairs
+- [x] P14-T01b Logo usage guide (light/dark, clear space, min size)
+- [x] P14-T02 Tailwind + Flowbite setup and component overrides
+- [x] P14-T03 Core components: buttons, inputs, selects, badges, cards
+- [x] P14-T04 App chrome: header, footer, nav, admin sidebar
+- [x] P14-T05 Tables, empty states, loading states, alerts
 
 **Phase 15 - Storefront UI**
 
