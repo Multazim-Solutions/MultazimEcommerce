@@ -1,16 +1,4 @@
 <x-storefront-layout>
-    @php
-        $fallbackImageUrl = asset('brand/multazim_logo.png');
-        $productsDisk = \Illuminate\Support\Facades\Storage::disk('products');
-        $resolveProductImageUrl = static function (?string $path) use ($productsDisk, $fallbackImageUrl): string {
-            if ($path === null || $path === '' || !$productsDisk->exists($path)) {
-                return $fallbackImageUrl;
-            }
-
-            return $productsDisk->url($path);
-        };
-    @endphp
-
     <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-10 space-y-8">
         <section class="rounded-2xl border border-sand-200 bg-white/90 p-4 shadow-elev-1 sm:p-5">
             <div class="mb-4 flex items-center justify-between">
@@ -45,33 +33,25 @@
                     <p class="text-xs uppercase tracking-[0.3em] text-muted">Catalog</p>
                     <h2 class="font-display text-2xl text-ink-900">Categories</h2>
                 </div>
-                <a href="{{ route('storefront.products.index') }}" class="text-sm font-semibold text-accent-700 hover:text-accent-800">View all</a>
+                <a href="{{ route('storefront.categories.index') }}" class="text-sm font-semibold text-accent-700 hover:text-accent-800">View all</a>
             </div>
 
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
-                @forelse ($categoryProducts as $categoryProduct)
-                    @php
-                        $categoryImage = $categoryProduct->images->sortBy('sort_order')->first();
-                        $categoryImageUrl = $resolveProductImageUrl($categoryImage?->path);
-                    @endphp
-
+                @forelse ($featuredCategories as $featuredCategory)
                     <a
-                        href="{{ route('storefront.products.show', $categoryProduct) }}"
+                        href="{{ route('storefront.categories.index') }}#category-{{ $featuredCategory->id }}"
                         class="group rounded-xl border border-sand-200 bg-white p-2 text-center transition hover:border-accent-400 hover:shadow-sm"
                     >
-                        <img
-                            src="{{ $categoryImageUrl }}"
-                            alt="{{ $categoryImage?->alt_text ?? $categoryProduct->name }}"
-                            class="mx-auto h-16 w-16 rounded-lg object-cover"
-                            loading="lazy"
-                            decoding="async"
-                        >
-                        <p class="mt-2 line-clamp-2 text-xs font-medium text-ink-700 group-hover:text-ink-900">
-                            {{ \Illuminate\Support\Str::limit($categoryProduct->name, 34) }}
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-primary-50 text-xl font-bold text-primary-800">
+                            {{ \Illuminate\Support\Str::substr($featuredCategory->name, 0, 1) }}
+                        </div>
+                        <p class="mt-2 line-clamp-2 text-xs font-semibold text-ink-800 group-hover:text-ink-900">
+                            {{ $featuredCategory->name }}
                         </p>
+                        <p class="mt-1 text-[11px] text-muted">{{ $featuredCategory->children_count }} subcategories</p>
                     </a>
                 @empty
-                    <x-ui.empty-state title="No category products" description="Create products to fill this section." />
+                    <x-ui.empty-state title="No categories yet" description="Seed category data to populate this section." />
                 @endforelse
             </div>
         </section>

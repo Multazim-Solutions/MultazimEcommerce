@@ -20,3 +20,4 @@
 - [x] P19-T12 Remove storefront intro banner section from home page
 - [x] P19-T13 Move stock badge below product title to prevent wrapping on long names
 - [x] P19-T14 Add hierarchical category model/subcategories and assign each product to a category
+- [x] P19-T15 Drive home category cards from real categories (limit 8) and add full categories page

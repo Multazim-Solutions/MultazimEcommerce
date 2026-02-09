@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Storefront;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -22,16 +24,31 @@ class HomeController extends Controller
             ->limit(64)
             ->get();
 
-        $categoryProducts = $products->take(16)->values();
-
         return view('storefront.home.index', [
             'promotionalSlides' => $this->promotionalSlides(),
-            'categoryProducts' => $categoryProducts,
+            'featuredCategories' => $this->featuredCategories(),
             'productSections' => $this->productSections($products),
             'serviceHighlights' => $this->serviceHighlights(),
             'quickLinks' => $this->quickLinks(),
             'informationLinks' => $this->informationLinks(),
         ]);
+    }
+
+    /**
+     * @return EloquentCollection<int, Category>
+     */
+    private function featuredCategories(): EloquentCollection
+    {
+        if (!Schema::hasTable('categories')) {
+            return new EloquentCollection();
+        }
+
+        return Category::query()
+            ->roots()
+            ->withCount('children')
+            ->orderBy('id')
+            ->limit(8)
+            ->get();
     }
 
     /**

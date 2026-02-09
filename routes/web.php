@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Payments\SslCommerzController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Storefront\CartController;
+use App\Http\Controllers\Storefront\CategoryController as StorefrontCategoryController;
 use App\Http\Controllers\Storefront\CheckoutController;
 use App\Http\Controllers\Storefront\HomeController;
 use App\Http\Controllers\Storefront\ProductController as StorefrontProductController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('storefront.')
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/categories', [StorefrontCategoryController::class, 'index'])->name('categories.index');
         Route::get('/products', [StorefrontProductController::class, 'index'])->name('products.index');
         Route::get('/products/{product:slug}', [StorefrontProductController::class, 'show'])->name('products.show');
 
