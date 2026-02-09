@@ -38,9 +38,15 @@
                                 @endif
                             @else
                                 <a class="rounded-full bg-accent-600 px-3 py-1.5 text-white transition hover:bg-accent-700" href="{{ route('login') }}">Sign in</a>
+                                <a class="hidden rounded-full border border-sand-200 px-3 py-1.5 text-ink-700 transition hover:border-sand-300 hover:text-ink-900 md:inline-flex" href="{{ route('admin.login') }}">Admin sign-in</a>
                             @endauth
                         </div>
                     </div>
+
+                    <nav class="mb-3 flex items-center gap-2 text-xs font-medium md:hidden">
+                        <a class="rounded-full border border-sand-200 px-3 py-1.5 text-ink-700" href="{{ route('storefront.products.index') }}">Products</a>
+                        <a class="rounded-full border border-sand-200 px-3 py-1.5 text-ink-700" href="{{ route('storefront.checkout.show') }}">Checkout</a>
+                    </nav>
                 </div>
             </header>
 

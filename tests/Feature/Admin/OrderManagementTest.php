@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Admin;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +21,7 @@ class OrderManagementTest extends TestCase
         ]);
 
         $order = Order::factory()->create([
-            'status' => 'pending',
+            'status' => OrderStatus::Pending,
         ]);
 
         $this->actingAs($admin)
@@ -42,7 +43,7 @@ class OrderManagementTest extends TestCase
         ]);
 
         $order = Order::factory()->create([
-            'status' => 'paid',
+            'status' => OrderStatus::Paid,
         ]);
 
         $this->actingAs($admin)
@@ -56,5 +57,26 @@ class OrderManagementTest extends TestCase
             'id' => $order->id,
             'status' => 'paid',
         ]);
+    }
+
+    public function test_admin_can_filter_orders_by_status(): void
+    {
+        $admin = User::factory()->create([
+            'role' => User::ROLE_ADMIN,
+        ]);
+
+        $paidOrder = Order::factory()->create([
+            'status' => OrderStatus::Paid,
+        ]);
+
+        $pendingOrder = Order::factory()->create([
+            'status' => OrderStatus::Pending,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.orders.index', ['status' => OrderStatus::Pending->value]))
+            ->assertOk()
+            ->assertSee('#'.$pendingOrder->id)
+            ->assertDontSee('#'.$paidOrder->id);
     }
 }

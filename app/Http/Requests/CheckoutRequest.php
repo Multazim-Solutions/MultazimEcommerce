@@ -23,6 +23,7 @@ class CheckoutRequest extends FormRequest
             'address_line2' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:120'],
             'postal_code' => ['required', 'string', 'max:30'],
+            'payment_method' => ['required', 'string', 'in:sslcommerz'],
         ];
     }
 }

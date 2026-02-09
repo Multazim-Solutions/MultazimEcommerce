@@ -9,19 +9,24 @@ use App\Http\Requests\Cart\AddCartItemRequest;
 use App\Http\Requests\Cart\UpdateCartItemRequest;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Services\Orders\OrderTotalCalculator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, OrderTotalCalculator $calculator): View
     {
         $cart = $this->resolveCart($request);
         $cart->load('items.product');
+        $totals = $calculator->calculate($cart->items, shipping: 0.0, tax: 0.0);
+        $currency = $cart->items->first()?->product?->currency ?? 'BDT';
 
         return view('storefront.cart.index', [
             'cart' => $cart,
+            'totals' => $totals,
+            'currency' => $currency,
         ]);
     }
 

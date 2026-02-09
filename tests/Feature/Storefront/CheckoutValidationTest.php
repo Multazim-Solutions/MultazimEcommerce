@@ -21,6 +21,7 @@ class CheckoutValidationTest extends TestCase
                 'address_line1',
                 'city',
                 'postal_code',
+                'payment_method',
             ]);
     }
 
@@ -34,6 +35,7 @@ class CheckoutValidationTest extends TestCase
             'address_line2' => 'Suite 4',
             'city' => 'Dhaka',
             'postal_code' => '1205',
+            'payment_method' => 'sslcommerz',
         ];
 
         $this->post(route('storefront.checkout.store'), $payload)

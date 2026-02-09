@@ -1,4 +1,14 @@
 <x-guest-layout>
+    @php
+        $adminIntent = request()->boolean('admin') || str_contains((string) session('url.intended', ''), '/admin');
+    @endphp
+
+    @if ($adminIntent)
+        <x-ui.alert class="mb-4" variant="info" title="Admin sign-in">
+            Sign in with an admin account to access the operations console.
+        </x-ui.alert>
+    @endif
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

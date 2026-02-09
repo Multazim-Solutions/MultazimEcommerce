@@ -6,10 +6,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductImageController;
-use App\Http\Controllers\Storefront\CartController;
-use App\Http\Controllers\Storefront\CheckoutController;
 use App\Http\Controllers\Payments\SslCommerzController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Storefront\CartController;
+use App\Http\Controllers\Storefront\CheckoutController;
 use App\Http\Controllers\Storefront\ProductController as StorefrontProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +27,10 @@ Route::name('storefront.')
         Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     });
+
+Route::middleware('guest')->get('/admin/login', function () {
+    return redirect()->route('login', ['admin' => '1']);
+})->name('admin.login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

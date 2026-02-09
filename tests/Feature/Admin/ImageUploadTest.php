@@ -40,4 +40,24 @@ class ImageUploadTest extends TestCase
         Storage::disk('products')->assertExists($image->path);
         $this->assertSame($product->id, $image->product_id);
     }
+
+    public function test_admin_image_upload_validates_file_type(): void
+    {
+        Storage::fake('products');
+
+        $admin = User::factory()->create([
+            'role' => User::ROLE_ADMIN,
+        ]);
+
+        $product = Product::factory()->create();
+
+        $this->actingAs($admin)
+            ->from(route('admin.products.edit', $product))
+            ->post(route('admin.products.images.store', $product), [
+                'image' => UploadedFile::fake()->create('document.pdf', 100, 'application/pdf'),
+                'alt_text' => 'Should fail',
+            ])
+            ->assertRedirect(route('admin.products.edit', $product))
+            ->assertSessionHasErrors(['image']);
+    }
 }

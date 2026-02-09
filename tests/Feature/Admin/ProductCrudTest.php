@@ -63,4 +63,32 @@ class ProductCrudTest extends TestCase
             'id' => $product->id,
         ]);
     }
+
+    public function test_admin_can_filter_products_by_status_and_stock(): void
+    {
+        $admin = User::factory()->create([
+            'role' => User::ROLE_ADMIN,
+        ]);
+
+        Product::factory()->create([
+            'name' => 'Visible Product',
+            'is_active' => true,
+            'stock_qty' => 5,
+        ]);
+
+        Product::factory()->create([
+            'name' => 'Archived Product',
+            'is_active' => false,
+            'stock_qty' => 0,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.products.index', [
+                'active' => 'inactive',
+                'stock' => 'out_of_stock',
+            ]))
+            ->assertOk()
+            ->assertSee('Archived Product')
+            ->assertDontSee('Visible Product');
+    }
 }

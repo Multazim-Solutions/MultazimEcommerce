@@ -8,14 +8,18 @@
     </div>
 
     <x-ui.card>
-        <form method="POST" action="{{ route('admin.products.store') }}" class="space-y-4">
+        <form method="POST" action="{{ route('admin.products.store') }}" class="space-y-4" x-data="{ submitting: false }" x-on:submit="submitting = true">
             @csrf
 
             @include('admin.products.partials.form', ['product' => null])
 
             <div class="flex justify-end">
-                <x-primary-button>Create</x-primary-button>
+                <x-primary-button x-bind:disabled="submitting">
+                    <span x-show="!submitting">Create</span>
+                    <span x-show="submitting" x-cloak>Creating...</span>
+                </x-primary-button>
             </div>
+            <x-ui.loading x-show="submitting" x-cloak label="Saving product..." />
         </form>
     </x-ui.card>
 </x-admin-layout>

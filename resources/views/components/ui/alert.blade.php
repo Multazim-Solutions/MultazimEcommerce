@@ -13,7 +13,7 @@
     $titleClass = $variant === 'info' ? 'text-ink-900' : 'text-current';
 @endphp
 
-<div data-ui="alert" data-variant="{{ $variant }}" {{ $attributes->merge(['class' => "rounded-xl border px-4 py-3 text-sm {$classes}"]) }}>
+<div data-ui="alert" data-variant="{{ $variant }}" role="status" aria-live="polite" {{ $attributes->merge(['class' => "rounded-xl border px-4 py-3 text-sm {$classes}"]) }}>
     @if ($title)
         <p class="font-semibold {{ $titleClass }}">{{ $title }}</p>
     @endif

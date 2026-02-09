@@ -45,4 +45,69 @@ class ProductListingTest extends TestCase
             ->assertOk()
             ->assertSee('Detail Product');
     }
+
+    public function test_storefront_product_detail_hides_inactive_products(): void
+    {
+        $product = Product::factory()->create([
+            'is_active' => false,
+        ]);
+
+        $this->get(route('storefront.products.show', $product))
+            ->assertNotFound();
+    }
+
+    public function test_storefront_list_applies_stock_and_search_filters(): void
+    {
+        Product::factory()->create([
+            'name' => 'Atlas Boots',
+            'description' => 'Premium leather pair',
+            'stock_qty' => 8,
+            'is_active' => true,
+        ]);
+
+        Product::factory()->create([
+            'name' => 'Atlas Jacket',
+            'description' => 'Winter outerwear',
+            'stock_qty' => 0,
+            'is_active' => true,
+        ]);
+
+        Product::factory()->create([
+            'name' => 'Nomad Pants',
+            'description' => 'Daily utility style',
+            'stock_qty' => 5,
+            'is_active' => true,
+        ]);
+
+        $this->get(route('storefront.products.index', [
+            'q' => 'Atlas',
+            'stock' => 'in_stock',
+            'sort' => 'newest',
+        ]))
+            ->assertOk()
+            ->assertSee('Atlas Boots')
+            ->assertDontSee('Atlas Jacket')
+            ->assertDontSee('Nomad Pants');
+    }
+
+    public function test_storefront_list_applies_selected_sort_order(): void
+    {
+        Product::factory()->create([
+            'name' => 'Budget Pick',
+            'price' => 100.00,
+            'is_active' => true,
+        ]);
+
+        Product::factory()->create([
+            'name' => 'Premium Pick',
+            'price' => 450.00,
+            'is_active' => true,
+        ]);
+
+        $this->get(route('storefront.products.index', [
+            'sort' => 'price_desc',
+        ]))
+            ->assertOk()
+            ->assertSeeInOrder(['Premium Pick', 'Budget Pick']);
+    }
 }

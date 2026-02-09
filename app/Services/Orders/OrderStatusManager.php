@@ -4,31 +4,26 @@ declare(strict_types=1);
 
 namespace App\Services\Orders;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
 use Illuminate\Validation\ValidationException;
 
 class OrderStatusManager
 {
-    private array $transitions = [
-        'pending' => ['paid', 'failed', 'cancelled'],
-        'paid' => ['shipped', 'cancelled'],
-        'failed' => [],
-        'shipped' => [],
-        'cancelled' => [],
-    ];
-
-    public function canTransition(string $from, string $to): bool
+    public function canTransition(OrderStatus $from, OrderStatus $to): bool
     {
-        if ($from === $to) {
-            return true;
-        }
-
-        return in_array($to, $this->transitions[$from] ?? [], true);
+        return $from->canTransitionTo($to);
     }
 
-    public function apply(Order $order, string $to): void
+    public function apply(Order $order, OrderStatus $to): void
     {
-        $from = (string) $order->status;
+        $from = $order->status;
+
+        if (! $from instanceof OrderStatus) {
+            throw ValidationException::withMessages([
+                'status' => 'Unknown order status.',
+            ]);
+        }
 
         if (! $this->canTransition($from, $to)) {
             throw ValidationException::withMessages([

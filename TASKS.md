@@ -12,33 +12,33 @@
 
 **Phase 15 - Storefront UI**
 
-- [ ] P15-T01 Product listing grid + filters + sort
-- [ ] P15-T02 Product detail page (gallery, price, stock, CTA)
-- [ ] P15-T03 Cart page with editable quantities + totals
-- [ ] P15-T04 Checkout form UI (address, contact, payment)
-- [ ] P15-T05 Storefront responsive pass (mobile-first)
+- [x] P15-T01 Product listing grid + filters + sort
+- [x] P15-T02 Product detail page (gallery, price, stock, CTA)
+- [x] P15-T03 Cart page with editable quantities + totals
+- [x] P15-T04 Checkout form UI (address, contact, payment)
+- [x] P15-T05 Storefront responsive pass (mobile-first)
 
 **Phase 16 - Admin UI**
 
-- [ ] P16-T01 Admin login + auth screens UI
-- [ ] P16-T02 Admin dashboard layout + stats cards
-- [ ] P16-T03 Product CRUD UI (forms, images, validation)
-- [ ] P16-T04 Order management UI (table, filters, status)
-- [ ] P16-T05 Image upload UI with preview + errors
+- [x] P16-T01 Admin login + auth screens UI
+- [x] P16-T02 Admin dashboard layout + stats cards
+- [x] P16-T03 Product CRUD UI (forms, images, validation)
+- [x] P16-T04 Order management UI (table, filters, status)
+- [x] P16-T05 Image upload UI with preview + errors
 
 **Phase 17 - UX + Accessibility**
 
-- [ ] P17-T01 Form UX consistency (labels, errors, help)
-- [ ] P17-T02 Accessibility pass (keyboard, focus, ARIA)
-- [ ] P17-T03 Performance pass (layout shift, image sizes)
-- [ ] P17-T04 Content states (empty, error, loading) for admin
-- [ ] P17-T05 Micro-interactions limited to state feedback only
+- [x] P17-T01 Form UX consistency (labels, errors, help)
+- [x] P17-T02 Accessibility pass (keyboard, focus, ARIA)
+- [x] P17-T03 Performance pass (layout shift, image sizes)
+- [x] P17-T04 Content states (empty, error, loading) for admin
+- [x] P17-T05 Micro-interactions limited to state feedback only
 
 **Phase 18 - UI E2E Tests + QA**
 
-- [ ] P18-T01 Playwright storefront UI flow coverage
-- [ ] P18-T02 Playwright admin UI flow coverage
-- [ ] P18-T03 Visual QA checklist (no skeleton-only pages)
+- [x] P18-T01 Playwright storefront UI flow coverage
+- [x] P18-T02 Playwright admin UI flow coverage
+- [x] P18-T03 Visual QA checklist (no skeleton-only pages)
 
 **Phase 13 - Documentation**
 

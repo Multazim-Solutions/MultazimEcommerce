@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Payments;
 
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\Payments\PaymentGateway;
@@ -50,7 +51,7 @@ class SslCommerzController extends Controller
             abort(404);
         }
 
-        if ($order->status === 'paid') {
+        if ($order->status === OrderStatus::Paid) {
             return view('payments.success', ['order' => $order]);
         }
 
@@ -66,7 +67,7 @@ class SslCommerzController extends Controller
 
             if (in_array($status, ['VALID', 'VALIDATED'], true)) {
                 $order->update([
-                    'status' => 'paid',
+                    'status' => OrderStatus::Paid,
                     'payment_provider' => 'sslcommerz',
                     'payment_ref' => $valId,
                 ]);
@@ -78,12 +79,12 @@ class SslCommerzController extends Controller
         }
 
         if ($type === 'cancel') {
-            $order->update(['status' => 'cancelled']);
+            $order->update(['status' => OrderStatus::Cancelled]);
 
             return view('payments.cancel', ['order' => $order]);
         }
 
-        $order->update(['status' => 'failed']);
+        $order->update(['status' => OrderStatus::Failed]);
 
         return view('payments.fail', ['order' => $order]);
     }
@@ -96,11 +97,11 @@ class SslCommerzController extends Controller
             'message' => $message,
         ]);
 
-        if ($order->status === 'paid') {
+        if ($order->status === OrderStatus::Paid) {
             return view('payments.success', ['order' => $order]);
         }
 
-        $order->update(['status' => 'failed']);
+        $order->update(['status' => OrderStatus::Failed]);
 
         return view('payments.fail', ['order' => $order]);
     }

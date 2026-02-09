@@ -23,6 +23,7 @@ test.describe('API E2E', () => {
         address_line2: 'Suite 2',
         city: 'Dhaka',
         postal_code: '1205',
+        payment_method: 'sslcommerz',
       },
     });
 

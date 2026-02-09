@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Payments;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
 use App\Services\Payments\PaymentGateway;
 use App\Services\Payments\PaymentInitResponse;
@@ -17,10 +18,11 @@ class SslCommerzCallbackTest extends TestCase
     public function test_success_callback_marks_order_paid(): void
     {
         $order = Order::factory()->create([
-            'status' => 'pending',
+            'status' => OrderStatus::Pending,
         ]);
 
-        $this->app->instance(PaymentGateway::class, new class implements PaymentGateway {
+        $this->app->instance(PaymentGateway::class, new class implements PaymentGateway
+        {
             public function initiate(Order $order, array $customer, array $urls): PaymentInitResponse
             {
                 return new PaymentInitResponse('https://example.test', 'order-'.$order->id.'-TEST', 'SESSION');
@@ -42,7 +44,7 @@ class SslCommerzCallbackTest extends TestCase
             ->assertViewIs('payments.success');
 
         $order->refresh();
-        $this->assertSame('paid', $order->status);
+        $this->assertSame(OrderStatus::Paid, $order->status);
         $this->assertSame('sslcommerz', $order->payment_provider);
         $this->assertSame('VAL123', $order->payment_ref);
     }
@@ -50,7 +52,7 @@ class SslCommerzCallbackTest extends TestCase
     public function test_fail_callback_marks_order_failed(): void
     {
         $order = Order::factory()->create([
-            'status' => 'pending',
+            'status' => OrderStatus::Pending,
         ]);
 
         $tranId = 'order-'.$order->id.'-FAIL';
@@ -70,7 +72,7 @@ class SslCommerzCallbackTest extends TestCase
     public function test_cancel_callback_marks_order_cancelled(): void
     {
         $order = Order::factory()->create([
-            'status' => 'pending',
+            'status' => OrderStatus::Pending,
         ]);
 
         $tranId = 'order-'.$order->id.'-CANCEL';
@@ -90,7 +92,7 @@ class SslCommerzCallbackTest extends TestCase
     public function test_paid_order_remains_paid_on_failed_callback(): void
     {
         $order = Order::factory()->create([
-            'status' => 'paid',
+            'status' => OrderStatus::Paid,
         ]);
 
         $tranId = 'order-'.$order->id.'-PAID';

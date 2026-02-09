@@ -46,4 +46,26 @@ class CartTest extends TestCase
             'id' => $cartItem->id,
         ]);
     }
+
+    public function test_cart_page_shows_running_totals(): void
+    {
+        $product = Product::factory()->create([
+            'name' => 'Totals Product',
+            'price' => 125.50,
+            'currency' => 'BDT',
+        ]);
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post(route('storefront.cart.add'), [
+            'product_id' => $product->id,
+            'qty' => 2,
+        ])->assertRedirect(route('storefront.cart.index'));
+
+        $this->actingAs($user)
+            ->get(route('storefront.cart.index'))
+            ->assertOk()
+            ->assertSee('Order summary')
+            ->assertSee('BDT 251.00');
+    }
 }

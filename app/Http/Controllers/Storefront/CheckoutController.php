@@ -4,25 +4,35 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Storefront;
 
+use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Services\Orders\OrderTotalCalculator;
 use App\Services\Payments\PaymentGateway;
 use App\Services\Payments\PaymentInitResponse;
-use App\Services\Orders\OrderTotalCalculator;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
-    public function show(): View
+    public function show(Request $request, OrderTotalCalculator $calculator): View
     {
-        return view('storefront.checkout.show');
+        $cart = $this->resolveCart($request);
+        $cart->load('items.product');
+        $totals = $calculator->calculate($cart->items, shipping: 0.0, tax: 0.0);
+        $currency = $cart->items->first()?->product?->currency ?? 'BDT';
+
+        return view('storefront.checkout.show', [
+            'cart' => $cart,
+            'totals' => $totals,
+            'currency' => $currency,
+        ]);
     }
 
     public function store(CheckoutRequest $request, PaymentGateway $gateway, OrderTotalCalculator $calculator): RedirectResponse
@@ -46,7 +56,7 @@ class CheckoutController extends Controller
         $order = DB::transaction(function () use ($cart, $request, $subtotal, $shipping, $tax, $total): Order {
             $order = Order::create([
                 'user_id' => $request->user()?->id,
-                'status' => 'pending',
+                'status' => OrderStatus::Pending,
                 'subtotal' => $subtotal,
                 'shipping' => $shipping,
                 'tax' => $tax,
