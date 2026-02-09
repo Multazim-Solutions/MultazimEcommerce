@@ -103,7 +103,7 @@
                         @if ($cart->items->isEmpty())
                             <x-secondary-button type="button" class="w-full" disabled>Proceed to checkout</x-secondary-button>
                         @else
-                            <a class="inline-flex w-full items-center justify-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-accent-700 ui-ring" href="{{ route('storefront.checkout.show') }}">
+                            <a class="inline-flex w-full items-center justify-center rounded-xl bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-primary-800 ui-ring" href="{{ route('storefront.checkout.show') }}">
                                 Proceed to checkout
                             </a>
                         @endif

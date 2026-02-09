@@ -4,41 +4,41 @@
 
 @layer base {
     :root {
-        --brand-50: 253 248 232;
-        --brand-100: 247 231 198;
-        --brand-200: 237 206 141;
-        --brand-300: 224 174 93;
-        --brand-400: 205 146 57;
-        --brand-500: 184 132 44;
-        --brand-600: 154 107 33;
-        --brand-700: 121 84 24;
-        --brand-800: 84 58 15;
-        --brand-900: 46 32 7;
+        --brand-50: 255 247 237;
+        --brand-100: 255 237 213;
+        --brand-200: 254 215 170;
+        --brand-300: 253 186 116;
+        --brand-400: 251 146 60;
+        --brand-500: 249 115 22;
+        --brand-600: 234 88 12;
+        --brand-700: 194 65 12;
+        --brand-800: 154 52 18;
+        --brand-900: 124 45 18;
 
-        --accent-50: 255 247 237;
-        --accent-100: 255 237 213;
-        --accent-200: 254 215 170;
-        --accent-300: 253 186 116;
-        --accent-400: 251 146 60;
-        --accent-500: 249 115 22;
-        --accent-600: 234 88 12;
-        --accent-700: 194 65 12;
-        --accent-800: 154 52 18;
-        --accent-900: 124 45 18;
+        --accent-50: 255 244 237;
+        --accent-100: 255 230 216;
+        --accent-200: 253 204 177;
+        --accent-300: 247 170 131;
+        --accent-400: 233 126 83;
+        --accent-500: 211 92 49;
+        --accent-600: 183 68 35;
+        --accent-700: 144 49 24;
+        --accent-800: 107 35 17;
+        --accent-900: 72 23 11;
 
-        --sand-50: 252 249 244;
-        --sand-100: 247 241 231;
-        --sand-200: 236 228 212;
-        --sand-300: 223 212 194;
-        --sand-400: 198 186 166;
-        --sand-500: 156 145 130;
+        --sand-50: 255 251 247;
+        --sand-100: 252 243 235;
+        --sand-200: 243 228 213;
+        --sand-300: 230 210 190;
+        --sand-400: 205 177 151;
+        --sand-500: 163 136 114;
 
         --ink-900: 16 18 23;
         --ink-700: 37 42 52;
         --ink-500: 74 82 99;
 
-        --muted: 98 106 121;
-        --border: 221 210 190;
+        --muted: 104 94 83;
+        --border: 233 216 197;
 
         --success-100: 209 241 223;
         --success-500: 25 135 84;
@@ -79,6 +79,6 @@
 
 @layer components {
     .ui-ring {
-        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-sand-50;
     }
 }

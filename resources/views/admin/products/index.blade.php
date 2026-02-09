@@ -4,7 +4,7 @@
             <p class="text-xs uppercase tracking-[0.3em] text-muted">Catalog</p>
             <h1 class="font-display text-2xl text-ink-900">Products</h1>
         </div>
-        <a class="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-accent-700 ui-ring" href="{{ route('admin.products.create') }}">New product</a>
+        <a class="inline-flex items-center rounded-xl bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-primary-800 ui-ring" href="{{ route('admin.products.create') }}">New product</a>
     </div>
 
     <x-ui.card class="mb-5" title="Filter products" description="Search by name/slug, filter by stock and status.">
@@ -52,7 +52,7 @@
     @if ($products->isEmpty())
         <x-ui.empty-state title="No products found" description="Try different filters or create a new product." />
         <div class="mt-4">
-            <a class="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-accent-700 ui-ring" href="{{ route('admin.products.create') }}">
+            <a class="inline-flex items-center rounded-xl bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-primary-800 ui-ring" href="{{ route('admin.products.create') }}">
                 Create product
             </a>
         </div>

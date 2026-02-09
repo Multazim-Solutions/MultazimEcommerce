@@ -57,126 +57,31 @@
             </div>
         </section>
 
-        <section
-            class="rounded-2xl border border-sand-200 bg-white p-3 shadow-elev-1 sm:p-4"
-            x-data="{
-                slides: @js($promotionalSlides),
-                activeIndex: 0,
-                timerId: null,
-                startAutoRotate() {
-                    if (this.slides.length <= 1) {
-                        return;
-                    }
-
-                    this.stopAutoRotate();
-                    this.timerId = window.setInterval(() => this.showNext(), 5000);
-                },
-                stopAutoRotate() {
-                    if (this.timerId !== null) {
-                        window.clearInterval(this.timerId);
-                        this.timerId = null;
-                    }
-                },
-                showNext() {
-                    if (this.slides.length === 0) {
-                        return;
-                    }
-
-                    this.activeIndex = (this.activeIndex + 1) % this.slides.length;
-                },
-                showPrevious() {
-                    if (this.slides.length === 0) {
-                        return;
-                    }
-
-                    this.activeIndex = (this.activeIndex - 1 + this.slides.length) % this.slides.length;
-                },
-                goTo(index) {
-                    this.activeIndex = index;
-                }
-            }"
-            x-init="startAutoRotate()"
-            x-on:mouseenter="stopAutoRotate()"
-            x-on:mouseleave="startAutoRotate()"
-        >
-            <div class="relative overflow-hidden rounded-xl">
-                <div class="relative h-56 sm:h-72 lg:h-80">
-                    <template x-for="(slide, slideIndex) in slides" :key="slide.image_url">
-                        <div x-show="activeIndex === slideIndex" x-transition.opacity.duration.500ms class="absolute inset-0">
-                            <img
-                                :src="slide.image_url"
-                                :alt="slide.heading"
-                                class="h-full w-full object-cover"
-                                loading="lazy"
-                                decoding="async"
-                            >
-                            <div class="absolute inset-0 bg-gradient-to-r from-ink-900/70 via-ink-900/40 to-transparent"></div>
-                            <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                                <p class="text-xs uppercase tracking-[0.24em] text-white/80">Promotional Banner</p>
-                                <h2 class="mt-2 max-w-lg font-display text-2xl text-white sm:text-3xl" x-text="slide.heading"></h2>
-                                <p class="mt-2 max-w-lg text-sm text-white/90" x-text="slide.subheading"></p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-
-                <button
-                    type="button"
-                    class="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-lg text-ink-900 shadow-sm transition hover:bg-white ui-ring"
-                    x-on:click="showPrevious()"
-                    aria-label="Previous promotional slide"
-                >
-                    &#8249;
-                </button>
-                <button
-                    type="button"
-                    class="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-lg text-ink-900 shadow-sm transition hover:bg-white ui-ring"
-                    x-on:click="showNext()"
-                    aria-label="Next promotional slide"
-                >
-                    &#8250;
-                </button>
+        <section class="rounded-2xl border border-sand-200 bg-white/90 p-4 shadow-elev-1 sm:p-5">
+            <div class="mb-4 flex items-center justify-between">
+                <h2 class="font-display text-xl text-ink-900">Promotions</h2>
+                <a href="{{ route('storefront.products.index') }}" class="text-sm font-semibold text-accent-700 hover:text-accent-800">Shop now</a>
             </div>
 
-            <div class="mt-3 flex items-center justify-center gap-2">
-                <template x-for="(slide, slideIndex) in slides" :key="`${slide.image_url}-${slideIndex}`">
-                    <button
-                        type="button"
-                        class="h-2.5 w-2.5 rounded-full transition"
-                        :class="activeIndex === slideIndex ? 'bg-accent-600' : 'bg-sand-300 hover:bg-sand-400'"
-                        :aria-label="`Go to slide ${slideIndex + 1}`"
-                        x-on:click="goTo(slideIndex)"
-                    ></button>
-                </template>
-            </div>
-        </section>
-
-        <section class="grid gap-4 md:grid-cols-3">
-            @forelse ($heroProducts as $heroProduct)
-                @php
-                    $heroImage = $heroProduct->images->sortBy('sort_order')->first();
-                    $heroImageUrl = $resolveProductImageUrl($heroImage?->path);
-                @endphp
-
-                <article class="group overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-elev-1 {{ $loop->first ? 'md:col-span-2 md:row-span-2' : '' }}">
-                    <a href="{{ route('storefront.products.show', $heroProduct) }}" class="block h-full">
-                        <div class="relative h-48 sm:h-56 {{ $loop->first ? 'md:h-full md:min-h-[380px]' : '' }}">
-                            <img
-                                class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                                src="{{ $heroImageUrl }}"
-                                alt="{{ $heroImage?->alt_text ?? $heroProduct->name }}"
-                                loading="lazy"
-                                decoding="async"
-                            >
-                            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/70 to-transparent p-4">
-                                <p class="line-clamp-2 text-sm font-semibold text-white sm:text-base">{{ $heroProduct->name }}</p>
-                            </div>
+            <div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+                @foreach ($promotionalSlides as $promotionalSlide)
+                    <article class="group relative min-w-[280px] snap-start overflow-hidden rounded-xl border border-sand-200 bg-white shadow-sm sm:min-w-[340px] md:min-w-0">
+                        <img
+                            src="{{ $promotionalSlide['image_url'] }}"
+                            alt="{{ $promotionalSlide['heading'] }}"
+                            class="h-44 w-full object-cover sm:h-52"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-ink-900/75 via-ink-900/30 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-4">
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/80">Promotional Banner</p>
+                            <h3 class="mt-1 text-lg font-semibold text-white">{{ $promotionalSlide['heading'] }}</h3>
+                            <p class="mt-1 text-sm text-white/90">{{ $promotionalSlide['subheading'] }}</p>
                         </div>
-                    </a>
-                </article>
-            @empty
-                <x-ui.empty-state title="No hero products" description="Add active products with images to populate this area." />
-            @endforelse
+                    </article>
+                @endforeach
+            </div>
         </section>
 
         <section class="rounded-2xl border border-sand-200 bg-white/90 p-5 shadow-elev-1 sm:p-6">

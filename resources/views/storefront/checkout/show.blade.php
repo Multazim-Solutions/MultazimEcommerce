@@ -27,7 +27,7 @@
         @if ($cart->items->isEmpty())
             <x-ui.empty-state title="Your cart is empty" description="Add products before starting checkout." />
             <div class="mt-4">
-                <a class="inline-flex items-center rounded-xl bg-accent-600 px-4 py-2 text-sm font-semibold text-white shadow-elev-1 transition hover:bg-accent-700 ui-ring" href="{{ route('storefront.products.index') }}">
+                <a class="inline-flex items-center rounded-xl border border-primary-200 bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-800 shadow-sm transition hover:bg-primary-100 ui-ring" href="{{ route('storefront.products.index') }}">
                     Browse products
                 </a>
             </div>

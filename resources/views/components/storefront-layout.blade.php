@@ -32,12 +32,12 @@
                         <div class="flex items-center gap-3 text-sm font-medium">
                             <a class="rounded-full border border-sand-200 px-3 py-1.5 text-ink-700 transition hover:border-sand-300 hover:text-ink-900" href="{{ route('storefront.cart.index') }}">Cart</a>
                             @auth
-                                <a class="rounded-full bg-accent-600 px-3 py-1.5 text-white transition hover:bg-accent-700" href="{{ route('dashboard') }}">Dashboard</a>
+                                <a class="rounded-full bg-primary-700 px-3 py-1.5 text-white transition hover:bg-primary-800 ui-ring" href="{{ route('dashboard') }}">Dashboard</a>
                                 @if (Auth::user()->role === 'admin')
-                                    <a class="rounded-full border border-accent-600 px-3 py-1.5 text-accent-700 transition hover:bg-accent-50" href="{{ route('admin.dashboard') }}">Admin</a>
+                                    <a class="rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-primary-800 transition hover:bg-primary-100 ui-ring" href="{{ route('admin.dashboard') }}">Admin</a>
                                 @endif
                             @else
-                                <a class="rounded-full bg-accent-600 px-3 py-1.5 text-white transition hover:bg-accent-700" href="{{ route('login') }}">Sign in</a>
+                                <a class="rounded-full bg-primary-700 px-3 py-1.5 text-white transition hover:bg-primary-800 ui-ring" href="{{ route('login') }}">Sign in</a>
                                 <a class="hidden rounded-full border border-sand-200 px-3 py-1.5 text-ink-700 transition hover:border-sand-300 hover:text-ink-900 md:inline-flex" href="{{ route('admin.login') }}">Admin sign-in</a>
                             @endauth
                         </div>

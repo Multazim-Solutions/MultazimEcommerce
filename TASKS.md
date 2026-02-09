@@ -11,3 +11,8 @@
 - [x] P19-T03 Switch global UI accent palette from blue to orange
 - [x] P19-T04 Verify storefront home content + theme updates through feature tests
 - [x] P19-T05 Reuse a shared storefront product card/grid item on home and products pages
+- [x] P19-T06 Apply a dark-orange primary Tailwind palette with matching secondary/accent variants
+- [x] P19-T07 Align primary CTA button color and focus ring to dark-orange primary tokens
+- [x] P19-T08 Normalize full-app button hierarchy (primary/secondary/danger) to avoid same-color CTAs
+- [x] P19-T09 Flatten card elevation, reduce corner radius, and remove home hero image block
+- [x] P19-T10 Convert promotional slider to standalone promo cards and remove arrows/indicators

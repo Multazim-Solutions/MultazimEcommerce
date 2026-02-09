@@ -22,16 +22,11 @@ class HomeController extends Controller
             ->limit(64)
             ->get();
 
-        $heroProducts = $products->filter(
-            static fn (Product $product): bool => $product->images->isNotEmpty()
-        )->take(6)->values();
-
         $categoryProducts = $products->take(16)->values();
 
         return view('storefront.home.index', [
             'menuItems' => $this->menuItems(),
             'promotionalSlides' => $this->promotionalSlides(),
-            'heroProducts' => $heroProducts,
             'categoryProducts' => $categoryProducts,
             'productSections' => $this->productSections($products),
             'serviceHighlights' => $this->serviceHighlights(),
