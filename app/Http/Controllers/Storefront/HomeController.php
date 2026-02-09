@@ -19,12 +19,19 @@ class HomeController extends Controller
                 $query->orderBy('sort_order');
             }])
             ->orderByDesc('id')
-            ->limit(48)
+            ->limit(64)
             ->get();
+
+        $heroProducts = $products->filter(
+            static fn (Product $product): bool => $product->images->isNotEmpty()
+        )->take(6)->values();
+
+        $categoryProducts = $products->take(16)->values();
 
         return view('storefront.home.index', [
             'menuItems' => $this->menuItems(),
-            'categoryItems' => $this->categoryItems(),
+            'heroProducts' => $heroProducts,
+            'categoryProducts' => $categoryProducts,
             'productSections' => $this->productSections($products),
             'serviceHighlights' => $this->serviceHighlights(),
             'quickLinks' => $this->quickLinks(),
@@ -38,40 +45,15 @@ class HomeController extends Controller
     private function menuItems(): array
     {
         return [
-            ['label' => 'Winter', 'url' => '#'],
-            ['label' => "Men's Fashion", 'url' => '#'],
-            ['label' => "Women's Fashion", 'url' => '#'],
-            ['label' => 'Home & Lifestyle', 'url' => '#'],
-            ['label' => 'Gadgets & Electronics', 'url' => '#'],
-            ['label' => 'Kids Zone', 'url' => '#'],
-            ['label' => 'Customize & Gift', 'url' => '#'],
-            ['label' => 'Offer', 'url' => '#'],
-            ['label' => "Other's", 'url' => '#'],
-        ];
-    }
-
-    /**
-     * @return array<int, array{label: string, url: string}>
-     */
-    private function categoryItems(): array
-    {
-        return [
-            ['label' => 'Mobile Accessories', 'url' => '#'],
-            ['label' => 'T-Shirt', 'url' => '#'],
-            ['label' => 'Watches', 'url' => '#'],
-            ['label' => 'Islamic Corner', 'url' => '#'],
-            ['label' => 'Shirts', 'url' => '#'],
-            ['label' => 'Kitchen & Dining', 'url' => '#'],
-            ['label' => 'Bag', 'url' => '#'],
-            ['label' => 'Health & Beauty', 'url' => '#'],
-            ['label' => 'Content Tools', 'url' => '#'],
-            ['label' => 'Electronics', 'url' => '#'],
-            ['label' => 'Speaker', 'url' => '#'],
-            ['label' => 'Home Appliance', 'url' => '#'],
-            ['label' => 'Bed Sheet', 'url' => '#'],
-            ['label' => 'Transparent Toys', 'url' => '#'],
-            ['label' => 'Borka', 'url' => '#'],
-            ['label' => 'Shaver & Trimmer', 'url' => '#'],
+            ['label' => 'Winter', 'url' => route('storefront.products.index', ['q' => 'winter'])],
+            ['label' => "Men's Fashion", 'url' => route('storefront.products.index', ['q' => 'men'])],
+            ['label' => "Women's Fashion", 'url' => route('storefront.products.index', ['q' => 'women'])],
+            ['label' => 'Home & Lifestyle', 'url' => route('storefront.products.index', ['q' => 'home'])],
+            ['label' => 'Gadgets & Electronics', 'url' => route('storefront.products.index', ['q' => 'electronics'])],
+            ['label' => 'Kids Zone', 'url' => route('storefront.products.index', ['q' => 'kids'])],
+            ['label' => 'Customize & Gift', 'url' => route('storefront.products.index', ['q' => 'gift'])],
+            ['label' => 'Offer', 'url' => route('storefront.products.index')],
+            ['label' => "Other's", 'url' => route('storefront.products.index')],
         ];
     }
 
@@ -148,9 +130,9 @@ class HomeController extends Controller
     private function quickLinks(): array
     {
         return [
-            ['label' => 'Order Tracking', 'url' => '#'],
+            ['label' => 'Products', 'url' => route('storefront.products.index')],
+            ['label' => 'Cart', 'url' => route('storefront.cart.index')],
             ['label' => 'Login', 'url' => route('login')],
-            ['label' => 'Register', 'url' => route('register')],
         ];
     }
 
