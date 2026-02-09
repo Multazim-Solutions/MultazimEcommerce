@@ -31,7 +31,13 @@ class ProductListingTest extends TestCase
 
         $this->get(route('storefront.home'))
             ->assertOk()
-            ->assertSee('Active Product');
+            ->assertSee('Categories')
+            ->assertSee('Flash Sale Products')
+            ->assertSee('Hot Selling Products')
+            ->assertSee('New Arrival Products')
+            ->assertSee('Top Selling Products')
+            ->assertSee('Active Product')
+            ->assertDontSee('Hidden Product');
     }
 
     public function test_storefront_product_detail_shows_product(): void
