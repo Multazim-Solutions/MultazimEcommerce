@@ -223,43 +223,9 @@
                     <a href="{{ route('storefront.products.index') }}" class="text-sm font-semibold text-accent-700 hover:text-accent-800">See more</a>
                 </div>
 
-                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                     @forelse ($section['products'] as $product)
-                        @php
-                            $sortedImages = $product->images->sortBy('sort_order')->values();
-                            $primaryImage = $sortedImages->get(0);
-                            $primaryImageUrl = $resolveProductImageUrl($primaryImage?->path);
-                            $displayPrice = rtrim(rtrim(number_format((float) $product->price, 2, '.', ''), '0'), '.');
-                        @endphp
-
-                        <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-sand-200 bg-white transition hover:-translate-y-0.5 hover:border-sand-300 hover:shadow-elev-2">
-                            <a href="{{ route('storefront.products.show', $product) }}" class="block overflow-hidden bg-sand-100">
-                                <img
-                                    src="{{ $primaryImageUrl }}"
-                                    alt="{{ $primaryImage?->alt_text ?? $product->name }}"
-                                    class="h-48 w-full object-cover transition duration-300 group-hover:scale-105"
-                                    loading="lazy"
-                                    decoding="async"
-                                >
-                            </a>
-
-                            <div class="flex flex-1 flex-col p-4">
-                                <a href="{{ route('storefront.products.show', $product) }}" class="line-clamp-2 text-sm font-semibold text-ink-900 hover:text-accent-700">
-                                    {{ $product->name }}
-                                </a>
-
-                                <p class="mt-2 text-base font-bold text-accent-700">{{ $displayPrice }} TK</p>
-
-                                <div class="mt-4 flex items-center gap-2">
-                                    <a
-                                        href="{{ route('storefront.products.show', $product) }}"
-                                        class="inline-flex flex-1 items-center justify-center rounded-xl bg-accent-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-accent-700"
-                                    >
-                                        Order Now
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
+                        <x-storefront.product-card :product="$product" />
                     @empty
                         <x-ui.empty-state title="No products in this section" description="Add more active products to populate it." />
                     @endforelse

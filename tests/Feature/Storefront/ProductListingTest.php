@@ -118,4 +118,23 @@ class ProductListingTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder(['Premium Pick', 'Budget Pick']);
     }
+
+    public function test_home_uses_shared_product_card_actions(): void
+    {
+        Product::factory()->create([
+            'name' => 'Shared Card Product',
+            'description' => 'Shared card body copy',
+            'currency' => 'BDT',
+            'price' => 350.00,
+            'stock_qty' => 5,
+            'is_active' => true,
+        ]);
+
+        $this->get(route('storefront.home'))
+            ->assertOk()
+            ->assertSee('Shared Card Product')
+            ->assertSee('In stock')
+            ->assertSee('Add to cart')
+            ->assertSee('Details');
+    }
 }

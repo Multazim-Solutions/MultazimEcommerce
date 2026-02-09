@@ -10,3 +10,4 @@
 - [x] P19-T02 Replace random factory product names with fixed storefront category names
 - [x] P19-T03 Switch global UI accent palette from blue to orange
 - [x] P19-T04 Verify storefront home content + theme updates through feature tests
+- [x] P19-T05 Reuse a shared storefront product card/grid item on home and products pages
