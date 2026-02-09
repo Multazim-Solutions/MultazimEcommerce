@@ -1,4 +1,5 @@
 **High-Level Architecture**
+
 - Laravel monolith with clear separation between Web UI and API endpoints
 - API-first design: storefront and admin consume shared JSON APIs; Blade (or lightweight JS) renders UI
 - Storefront module with modern, simple, lightweight UI for product listing, product details, cart, and checkout
@@ -9,6 +10,7 @@
 - Structured application logging with JSON output for easy parsing
 
 **Directory Structure And Key Laravel Components**
+
 - `app/Http/Controllers` for storefront, admin, and API controllers
 - `app/Http/Middleware` for auth, role checks, rate limiting, and request logging
 - `app/Models` for Product, Order, OrderItem, User, ProductImage
@@ -22,6 +24,7 @@
 - `storage/app/public` for product images (served via `public/storage` symlink)
 
 **Database Schema (SQLite)**
+
 - `users`
 - `users.id` (PK), `name`, `email` (unique), `password_hash`, `google_id` (nullable), `role` (admin|customer), `created_at`, `updated_at`
 - `products`
@@ -38,6 +41,7 @@
 - `cart_items.id`, `cart_id` (FK), `product_id` (FK), `qty`, `created_at`, `updated_at`
 
 **Docker Setup (Services, Volumes, Env Strategy)**
+
 - Services
 - `app` container for Laravel PHP-FPM or Octane
 - `web` container for Nginx (reverse proxy + static assets)
@@ -53,6 +57,7 @@
 - Centralized configuration via Laravel config files; no hardcoded secrets
 
 **Authentication And Authorization Flow**
+
 - Email & password authentication via Laravel auth scaffolding
 - Google Sign-In via OAuth2 with Socialite
 - Unified user table with `google_id` for account linking
@@ -61,6 +66,7 @@
 - API endpoints protected with tokens (Laravel Sanctum) for future mobile clients
 
 **Payment Flow With SSLCommerz**
+
 - Checkout creates `orders` record in `pending` status
 - Redirect to SSLCommerz payment gateway with signed request
 - Handle success, fail, and cancel callbacks via dedicated endpoints
@@ -70,6 +76,7 @@
 - Idempotent callback handling to avoid duplicate updates
 
 **Image Upload And Storage Strategy**
+
 - Store images under `storage/app/public/products/<product_id>/`
 - Generate optimized sizes (thumbnail, medium, large) on upload
 - Save image metadata in `product_images` table
@@ -77,12 +84,14 @@
 - Enforce file type, size limits, and virus scan hook (future)
 
 **Logging Approach**
+
 - Structured JSON logs using Laravel Monolog configuration
 - Separate channels for `app`, `payments`, and `auth`
 - Include request ID, user ID, and order ID in log context
 - Log to stdout in containers for easy collection by Docker
 
 **Security Considerations**
+
 - Input validation on all endpoints using Form Requests
 - CSRF protection for web forms
 - Rate limiting on auth and checkout endpoints
@@ -92,6 +101,7 @@
 - Use HTTPS in production; secure cookies and same-site policy
 
 **Future Extensibility Notes**
+
 - API versioning (`/api/v1`) to support mobile clients
 - Swap SQLite with MySQL/PostgreSQL by keeping Eloquent and migrations database-agnostic
 - Introduce queue workers for email, image processing, and payment reconciliation
@@ -100,36 +110,14 @@
 - Horizontal scaling by separating web and worker containers
 
 **Testing Strategy**
+
 - PHPUnit for unit and feature tests within Laravel
 - Playwright for UI (storefront/admin) and API end-to-end tests
 
 **UI/UX Roadmap (Tailwind + Flowbite)**
+
 - Direction: minimal, fast, low-motion, ecommerce-first UI
 - Stack: Tailwind CSS + Flowbite components (customized), tiny utility helpers only
 - Motion: no heavy animation; only subtle state transitions (hover/focus/disabled)
 - Accessibility: keyboard-first flows, visible focus, high-contrast defaults
 - Brand: derive palette from Multazim logo, but use higher-contrast UX colors for UI surfaces and CTAs
-
-**Phased UI Plan**
-- [done] **Phase 14 - Design System + Layout**
-  - Establish tokens (color, spacing, typography) and base layout grids
-  - Extract logo palette and define contrast pairs for primary/secondary/alert states
-  - Define logo usage rules (light/dark surfaces, minimum size, clear space)
-  - Create reusable UI components (buttons, inputs, cards, badges, tables)
-  - Add app chrome: header, footer, nav, admin sidebar
-  - Wire Tailwind + Flowbite config and component overrides
-- [done] **Phase 15 - Storefront UI**
-  - Product list + filters, product detail, cart, checkout
-  - Empty/loading/error states for all storefront screens
-  - Mobile-first responsive polish for storefront
-- [done] **Phase 16 - Admin UI**
-  - Admin auth screens, dashboard, product CRUD, order management
-  - Image upload UI with previews and validation feedback
-  - Data tables with paging, search, and status chips
-- [done] **Phase 17 - UX + Accessibility**
-  - Performance pass (reduce layout shift, optimize images)
-  - Keyboard navigation and ARIA for complex widgets
-  - Consistent form validation UX across app
-- [done] **Phase 18 - UI E2E Tests + QA**
-  - Playwright flows for storefront and admin UI
-  - Visual sanity checks (no skeleton-only pages)
