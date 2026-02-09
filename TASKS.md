@@ -16,3 +16,5 @@
 - [x] P19-T08 Normalize full-app button hierarchy (primary/secondary/danger) to avoid same-color CTAs
 - [x] P19-T09 Flatten card elevation, reduce corner radius, and remove home hero image block
 - [x] P19-T10 Convert promotional slider to standalone promo cards and remove arrows/indicators
+- [x] P19-T11 Move search to top bar, simplify top actions, and add categories dropdown bar
+- [x] P19-T12 Remove storefront intro banner section from home page

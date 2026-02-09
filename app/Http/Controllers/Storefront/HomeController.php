@@ -25,7 +25,6 @@ class HomeController extends Controller
         $categoryProducts = $products->take(16)->values();
 
         return view('storefront.home.index', [
-            'menuItems' => $this->menuItems(),
             'promotionalSlides' => $this->promotionalSlides(),
             'categoryProducts' => $categoryProducts,
             'productSections' => $this->productSections($products),
@@ -33,24 +32,6 @@ class HomeController extends Controller
             'quickLinks' => $this->quickLinks(),
             'informationLinks' => $this->informationLinks(),
         ]);
-    }
-
-    /**
-     * @return array<int, array{label: string, url: string}>
-     */
-    private function menuItems(): array
-    {
-        return [
-            ['label' => 'Winter', 'url' => route('storefront.products.index', ['q' => 'winter'])],
-            ['label' => "Men's Fashion", 'url' => route('storefront.products.index', ['q' => 'men'])],
-            ['label' => "Women's Fashion", 'url' => route('storefront.products.index', ['q' => 'women'])],
-            ['label' => 'Home & Lifestyle', 'url' => route('storefront.products.index', ['q' => 'home'])],
-            ['label' => 'Gadgets & Electronics', 'url' => route('storefront.products.index', ['q' => 'electronics'])],
-            ['label' => 'Kids Zone', 'url' => route('storefront.products.index', ['q' => 'kids'])],
-            ['label' => 'Customize & Gift', 'url' => route('storefront.products.index', ['q' => 'gift'])],
-            ['label' => 'Offer', 'url' => route('storefront.products.index')],
-            ['label' => "Other's", 'url' => route('storefront.products.index')],
-        ];
     }
 
     /**

@@ -12,51 +12,6 @@
     @endphp
 
     <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-10 space-y-8">
-        <section class="rounded-3xl border border-sand-200 bg-gradient-to-br from-brand-100 via-sand-50 to-accent-100 p-6 shadow-elev-1 sm:p-8">
-            <div class="grid gap-6 lg:grid-cols-[1.3fr,1fr] lg:items-center">
-                <div>
-                    <p class="text-xs uppercase tracking-[0.3em] text-muted">Storefront</p>
-                    <h1 class="mt-3 font-display text-3xl text-ink-900 sm:text-4xl">Multazim Store, Tailwind Edition</h1>
-                    <p class="mt-3 max-w-2xl text-sm text-muted sm:text-base">
-                        Same storefront data from your own database, now styled only with the shared Tailwind system used across the app.
-                    </p>
-
-                    <div class="mt-5 flex flex-wrap gap-2">
-                        @foreach ($menuItems as $menuItem)
-                            <a
-                                href="{{ $menuItem['url'] }}"
-                                class="rounded-full border border-sand-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-ink-700 transition hover:border-accent-400 hover:text-ink-900"
-                            >
-                                {{ $menuItem['label'] }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="rounded-2xl border border-sand-200 bg-white/85 p-4 shadow-sm sm:p-5">
-                    <form method="GET" action="{{ route('storefront.products.index') }}" class="space-y-3">
-                        <div>
-                            <x-input-label for="home-search" :value="__('Search Products')" />
-                            <x-text-input
-                                id="home-search"
-                                class="mt-1 block w-full"
-                                type="search"
-                                name="q"
-                                :value="request('q')"
-                                placeholder="Search by name or description"
-                            />
-                        </div>
-                        <x-primary-button class="w-full justify-center">Search catalog</x-primary-button>
-                    </form>
-
-                    <div class="mt-4 rounded-xl border border-sand-200 bg-sand-100 p-3 text-sm">
-                        <p class="font-semibold text-ink-900">Call Us Now</p>
-                        <a href="tel:01317448899" class="text-accent-700 hover:text-accent-800">01317448899</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="rounded-2xl border border-sand-200 bg-white/90 p-4 shadow-elev-1 sm:p-5">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="font-display text-xl text-ink-900">Promotions</h2>
