@@ -30,6 +30,7 @@ class HomeController extends Controller
 
         return view('storefront.home.index', [
             'menuItems' => $this->menuItems(),
+            'promotionalSlides' => $this->promotionalSlides(),
             'heroProducts' => $heroProducts,
             'categoryProducts' => $categoryProducts,
             'productSections' => $this->productSections($products),
@@ -54,6 +55,30 @@ class HomeController extends Controller
             ['label' => 'Customize & Gift', 'url' => route('storefront.products.index', ['q' => 'gift'])],
             ['label' => 'Offer', 'url' => route('storefront.products.index')],
             ['label' => "Other's", 'url' => route('storefront.products.index')],
+        ];
+    }
+
+    /**
+     * @return array<int, array{image_url: string, heading: string, subheading: string}>
+     */
+    private function promotionalSlides(): array
+    {
+        return [
+            [
+                'image_url' => 'https://mohasagor.com.bd/public/storage/images/reseller_slider/c47UZMJLOFSZPAp3c6ZuzDL8omp0r8NKA7oOhNoB.png',
+                'heading' => 'Seasonal Deals',
+                'subheading' => 'Fresh picks and campaign bundles curated for daily shoppers.',
+            ],
+            [
+                'image_url' => 'https://mohasagor.com.bd/public/storage/images/reseller_slider/aM07nJ0HX0Fdf5XCm8lqMdE4DEzN7cbJjxC1BStk.png',
+                'heading' => 'Limited-Time Promotions',
+                'subheading' => 'Catch high-demand products with short-run promotional pricing.',
+            ],
+            [
+                'image_url' => 'https://mohasagor.com.bd/public/storage/images/reseller_slider/zaUkVOIdi0GV94vj0xZcoljDEOjTcGpanbDKKHN7.jpg',
+                'heading' => 'New Arrival Spotlight',
+                'subheading' => 'Explore latest arrivals across fashion, gadgets, and home essentials.',
+            ],
         ];
     }
 

@@ -57,6 +57,100 @@
             </div>
         </section>
 
+        <section
+            class="rounded-2xl border border-sand-200 bg-white p-3 shadow-elev-1 sm:p-4"
+            x-data="{
+                slides: @js($promotionalSlides),
+                activeIndex: 0,
+                timerId: null,
+                startAutoRotate() {
+                    if (this.slides.length <= 1) {
+                        return;
+                    }
+
+                    this.stopAutoRotate();
+                    this.timerId = window.setInterval(() => this.showNext(), 5000);
+                },
+                stopAutoRotate() {
+                    if (this.timerId !== null) {
+                        window.clearInterval(this.timerId);
+                        this.timerId = null;
+                    }
+                },
+                showNext() {
+                    if (this.slides.length === 0) {
+                        return;
+                    }
+
+                    this.activeIndex = (this.activeIndex + 1) % this.slides.length;
+                },
+                showPrevious() {
+                    if (this.slides.length === 0) {
+                        return;
+                    }
+
+                    this.activeIndex = (this.activeIndex - 1 + this.slides.length) % this.slides.length;
+                },
+                goTo(index) {
+                    this.activeIndex = index;
+                }
+            }"
+            x-init="startAutoRotate()"
+            x-on:mouseenter="stopAutoRotate()"
+            x-on:mouseleave="startAutoRotate()"
+        >
+            <div class="relative overflow-hidden rounded-xl">
+                <div class="relative h-56 sm:h-72 lg:h-80">
+                    <template x-for="(slide, slideIndex) in slides" :key="slide.image_url">
+                        <div x-show="activeIndex === slideIndex" x-transition.opacity.duration.500ms class="absolute inset-0">
+                            <img
+                                :src="slide.image_url"
+                                :alt="slide.heading"
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-r from-ink-900/70 via-ink-900/40 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                                <p class="text-xs uppercase tracking-[0.24em] text-white/80">Promotional Banner</p>
+                                <h2 class="mt-2 max-w-lg font-display text-2xl text-white sm:text-3xl" x-text="slide.heading"></h2>
+                                <p class="mt-2 max-w-lg text-sm text-white/90" x-text="slide.subheading"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <button
+                    type="button"
+                    class="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-lg text-ink-900 shadow-sm transition hover:bg-white ui-ring"
+                    x-on:click="showPrevious()"
+                    aria-label="Previous promotional slide"
+                >
+                    &#8249;
+                </button>
+                <button
+                    type="button"
+                    class="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-lg text-ink-900 shadow-sm transition hover:bg-white ui-ring"
+                    x-on:click="showNext()"
+                    aria-label="Next promotional slide"
+                >
+                    &#8250;
+                </button>
+            </div>
+
+            <div class="mt-3 flex items-center justify-center gap-2">
+                <template x-for="(slide, slideIndex) in slides" :key="`${slide.image_url}-${slideIndex}`">
+                    <button
+                        type="button"
+                        class="h-2.5 w-2.5 rounded-full transition"
+                        :class="activeIndex === slideIndex ? 'bg-accent-600' : 'bg-sand-300 hover:bg-sand-400'"
+                        :aria-label="`Go to slide ${slideIndex + 1}`"
+                        x-on:click="goTo(slideIndex)"
+                    ></button>
+                </template>
+            </div>
+        </section>
+
         <section class="grid gap-4 md:grid-cols-3">
             @forelse ($heroProducts as $heroProduct)
                 @php

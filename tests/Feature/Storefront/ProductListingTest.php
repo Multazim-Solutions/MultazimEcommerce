@@ -31,6 +31,8 @@ class ProductListingTest extends TestCase
 
         $this->get(route('storefront.home'))
             ->assertOk()
+            ->assertSee('Promotional Banner')
+            ->assertSee('c47UZMJLOFSZPAp3c6ZuzDL8omp0r8NKA7oOhNoB.png')
             ->assertSee('Categories')
             ->assertSee('Flash Sale Products')
             ->assertSee('Hot Selling Products')
