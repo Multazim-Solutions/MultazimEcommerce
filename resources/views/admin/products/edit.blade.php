@@ -12,7 +12,7 @@
             @csrf
             @method('PUT')
 
-            @include('admin.products.partials.form', ['product' => $product])
+            @include('admin.products.partials.form', ['product' => $product, 'categoryGroups' => $categoryGroups])
 
             <div class="flex justify-end">
                 <x-primary-button x-bind:disabled="submitting">

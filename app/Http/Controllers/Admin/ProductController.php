@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductIndexRequest;
 use App\Http\Requests\Admin\StoreProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -17,7 +19,7 @@ class ProductController extends Controller
 {
     public function index(ProductIndexRequest $request): View
     {
-        $query = Product::query();
+        $query = Product::query()->with('category.parent');
 
         $query = $this->applySearch($query, $request->search());
         $query = $this->applyStockFilter($query, $request->stock());
@@ -41,7 +43,9 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        return view('admin.products.create');
+        return view('admin.products.create', [
+            'categoryGroups' => $this->categoryGroups(),
+        ]);
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
@@ -57,6 +61,7 @@ class ProductController extends Controller
     {
         return view('admin.products.edit', [
             'product' => $product,
+            'categoryGroups' => $this->categoryGroups(),
         ]);
     }
 
@@ -117,5 +122,26 @@ class ProductController extends Controller
             'stock_low' => $query->orderBy('stock_qty'),
             default => $query->orderByDesc('id'),
         };
+    }
+
+    /**
+     * @return array<int, array{parent_name: string, categories: EloquentCollection<int, Category>}>
+     */
+    private function categoryGroups(): array
+    {
+        return Category::query()
+            ->roots()
+            ->with(['children' => static function (Builder $query): void {
+                $query->orderBy('name');
+            }])
+            ->orderBy('name')
+            ->get()
+            ->map(static fn (Category $rootCategory): array => [
+                'parent_name' => $rootCategory->name,
+                'categories' => $rootCategory->children,
+            ])
+            ->filter(static fn (array $group): bool => $group['categories']->isNotEmpty())
+            ->values()
+            ->all();
     }
 }

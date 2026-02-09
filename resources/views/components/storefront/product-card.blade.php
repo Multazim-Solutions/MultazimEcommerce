@@ -24,15 +24,17 @@
     </div>
 
     <div class="flex flex-1 flex-col p-5">
-        <div class="mb-3 flex items-start justify-between gap-3">
+        <div class="mb-3">
             <h2 class="text-lg font-semibold text-ink-900">
                 <a class="ui-ring rounded-sm" href="{{ route('storefront.products.show', $product) }}">
                     {{ $product->name }}
                 </a>
             </h2>
-            <x-ui.badge :variant="$hasStock ? 'success' : 'warning'">
-                {{ $hasStock ? 'In stock' : 'Out of stock' }}
-            </x-ui.badge>
+            <div class="mt-2">
+                <x-ui.badge class="whitespace-nowrap" :variant="$hasStock ? 'success' : 'warning'">
+                    {{ $hasStock ? 'In stock' : 'Out of stock' }}
+                </x-ui.badge>
+            </div>
         </div>
 
         <p class="line-clamp-3 text-sm text-muted">{{ $product->description }}</p>

@@ -11,7 +11,7 @@
         <form method="POST" action="{{ route('admin.products.store') }}" class="space-y-4" x-data="{ submitting: false }" x-on:submit="submitting = true">
             @csrf
 
-            @include('admin.products.partials.form', ['product' => null])
+            @include('admin.products.partials.form', ['product' => null, 'categoryGroups' => $categoryGroups])
 
             <div class="flex justify-end">
                 <x-primary-button x-bind:disabled="submitting">

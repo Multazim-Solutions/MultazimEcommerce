@@ -4,39 +4,30 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use App\Data\Storefront\CategoryCatalog;
 use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ProductFactoryCategoryNamesTest extends TestCase
 {
-    public function test_product_factory_uses_predefined_category_names(): void
+    use RefreshDatabase;
+
+    public function test_product_factory_assigns_products_to_subcategories_from_catalog(): void
     {
-        $allowedCategoryNames = [
-            'Mobile Accessories',
-            'T-Shirt',
-            'Watches',
-            'Islamic Corner',
-            'Shirts',
-            'Kitchen & Dining',
-            'Bag',
-            'Health & Beauty',
-            'Content Tools',
-            'Electronics',
-            'Speaker',
-            'Home Appliance',
-            'Bed Sheet',
-            'Transparent Toys',
-            'Borka',
-            'Shaver & Trimmer',
-        ];
+        $allowedProductNames = CategoryCatalog::allProductNames();
 
         for ($index = 0; $index < 64; $index++) {
-            $product = Product::factory()->make();
+            $product = Product::factory()->create();
 
-            $this->assertContains(
-                $product->name,
-                $allowedCategoryNames,
-                sprintf('Factory generated unexpected category name: %s', $product->name),
+            $this->assertNotNull($product->category, 'Product category must be assigned.');
+            $this->assertNotNull($product->category?->parent, 'Product must be assigned to a subcategory.');
+
+            $isKnownMockProductName = in_array($product->name, $allowedProductNames, true);
+            $usesFallbackName = str_ends_with($product->name, ' Item');
+            $this->assertTrue(
+                $isKnownMockProductName || $usesFallbackName,
+                sprintf('Factory generated unexpected mock product name: %s', $product->name),
             );
         }
     }

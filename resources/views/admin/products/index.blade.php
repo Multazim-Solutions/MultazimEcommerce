@@ -61,6 +61,7 @@
             <thead class="bg-sand-100 text-xs uppercase tracking-widest text-muted">
                 <tr>
                     <th class="px-4 py-3 text-left font-medium">Name</th>
+                    <th class="px-4 py-3 text-left font-medium">Category</th>
                     <th class="px-4 py-3 text-left font-medium">Price</th>
                     <th class="px-4 py-3 text-left font-medium">Stock</th>
                     <th class="px-4 py-3 text-left font-medium">Status</th>
@@ -71,6 +72,13 @@
                 @foreach ($products as $product)
                     <tr class="hover:bg-sand-50/70">
                         <td class="px-4 py-3 text-sm font-medium text-ink-900">{{ $product->name }}</td>
+                        <td class="px-4 py-3 text-sm text-muted">
+                            @if ($product->category?->parent)
+                                {{ $product->category->parent->name }} &raquo; {{ $product->category->name }}
+                            @else
+                                {{ $product->category?->name ?? 'Uncategorized' }}
+                            @endif
+                        </td>
                         <td class="px-4 py-3 text-sm text-muted">{{ $product->currency }} {{ number_format((float) $product->price, 2) }}</td>
                         <td class="px-4 py-3 text-sm text-muted">{{ $product->stock_qty }}</td>
                         <td class="px-4 py-3 text-sm">

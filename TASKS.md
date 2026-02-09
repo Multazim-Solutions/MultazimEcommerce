@@ -18,3 +18,5 @@
 - [x] P19-T10 Convert promotional slider to standalone promo cards and remove arrows/indicators
 - [x] P19-T11 Move search to top bar, simplify top actions, and add categories dropdown bar
 - [x] P19-T12 Remove storefront intro banner section from home page
+- [x] P19-T13 Move stock badge below product title to prevent wrapping on long names
+- [x] P19-T14 Add hierarchical category model/subcategories and assign each product to a category

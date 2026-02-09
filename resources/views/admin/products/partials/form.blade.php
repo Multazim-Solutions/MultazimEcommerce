@@ -11,6 +11,27 @@
 </div>
 
 <div>
+    <x-input-label for="category_id" :value="__('Category')" />
+    <x-select-input id="category_id" name="category_id" class="mt-1 w-full" required>
+        @forelse ($categoryGroups as $categoryGroup)
+            <optgroup label="{{ $categoryGroup['parent_name'] }}">
+                @foreach ($categoryGroup['categories'] as $category)
+                    <option
+                        value="{{ $category->id }}"
+                        @selected((int) old('category_id', $product?->category_id ?? 0) === $category->id)
+                    >
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </optgroup>
+        @empty
+            <option value="" disabled selected>No categories found</option>
+        @endforelse
+    </x-select-input>
+    <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+</div>
+
+<div>
     <x-input-label for="description" :value="__('Description')" />
     <textarea id="description" name="description" class="mt-1 w-full rounded-xl border border-sand-200 bg-white px-3 py-2 text-sm text-ink-900 shadow-sm focus:border-accent-500 focus:ring-accent-500 ui-ring" rows="4">{{ old('description', $product?->description) }}</textarea>
     <x-input-error :messages="$errors->get('description')" class="mt-2" />

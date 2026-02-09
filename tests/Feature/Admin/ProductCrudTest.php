@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Admin;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +20,10 @@ class ProductCrudTest extends TestCase
             'role' => User::ROLE_ADMIN,
         ]);
 
+        $category = Category::factory()->subcategory()->create();
+
         $payload = [
+            'category_id' => $category->id,
             'name' => 'Test Product',
             'slug' => 'test-product',
             'description' => 'Simple description',
@@ -35,7 +39,10 @@ class ProductCrudTest extends TestCase
 
         $product = Product::query()->where('slug', 'test-product')->firstOrFail();
 
+        $updatedCategory = Category::factory()->subcategory()->create();
+
         $update = [
+            'category_id' => $updatedCategory->id,
             'name' => 'Updated Product',
             'slug' => 'updated-product',
             'description' => 'Updated description',
